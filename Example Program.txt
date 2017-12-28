@@ -1,0 +1,9 @@
+int start(){
+	int x = 10;
+	int y = 11;
+	int z = add(x,y);
+}
+
+int add(int x, int y){
+	return (x + y);
+}

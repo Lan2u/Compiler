@@ -1,0 +1,18 @@
+program -> method*
+method -> methodHeader methodBody
+methodHead -> dataType identifier argumentBlock
+methodBody -> OPEN_CURLY statements CLOSE_CURLY
+statements -> (statement SEMI_COLON)*
+statement -> variableDec
+statement -> variableAssignment
+statement -> variableDecAndAssignment
+statement -> expression
+argumentBlock -> OPEN_BRACKET variableDec* CLOSE_BRACKET
+variableDec -> dataType identifier
+variableAssignment -> identifier EQUALS expression;
+variableDecAndAssignment -> dataType identifier EQUALS expression;
+dataType -> INT | CHAR
+identifier -> character+
+character -> A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z
+OPEN_BRACKET -> (
+CLOSE_BRACKET -> )
