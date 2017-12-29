@@ -15,7 +15,7 @@ class List {
 public:
 	List (void);
 	~List (void);
-	void print (void);
+	virtual void print (void);
 
 	virtual void push (Temp data);
 
@@ -37,7 +37,8 @@ template <class Temp>
 List<Temp>::List (void)
 {
 	length = 0;
-	head = tail = nullptr;
+	head = nullptr;
+	tail = nullptr;
 }
 
 // Destructor, destroy nodes
@@ -56,23 +57,30 @@ template <class Temp>
 void List<Temp>::print (void)
 {
 	Node *n = head;
-	while ((n = n->next) != nullptr)
-		std::cout << n->pos << ":\t" << n->data;	
+	while (n != nullptr) {
+		std::cout << n->pos << ":\t" << n->data << "\n";
+		n = n->next;
+	}
 }
 
 // Push the tail
 template <class Temp> 
 void List<Temp>::push (Temp data)
-{
+{	
 	// Create a new node and set it's fields
 	Node *newNode = new Node;
 	newNode->data = data;
-	newNode->pos = ++length;
+	newNode->pos = length++;
 	newNode->previous = tail;
 	newNode->next = nullptr;
 
 	// Set the tail to newNode
-	tail = newNode;
+	if (head == nullptr)
+		tail = head = newNode;
+	else {
+		tail->next = newNode;
+		tail = newNode;
+	}
 }
 
 // Stack derived class
