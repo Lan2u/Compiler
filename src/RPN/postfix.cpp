@@ -39,17 +39,16 @@ unsigned Postfix::convertToPostfix (char* tokenStream, unsigned expressionStart,
 			output->push(*(tokenStream + i));
 		}
 		else if (*(tokenStream + i) == BRACKET_OPEN_SYMBOL) { // (
-												   // Recurse since the next part of the equation is in brackets. 
-												   // The braket itself is skipped.
+			// Recurse since the next part of the equation is in brackets. 
+			// The braket itself is skipped.
 			i = convertToPostfix(tokenStream, i + 1, expressionEnd, output);
 		}
 		else if (*(tokenStream + i) == BRACKET_CLOSE_SYMBOL) { // )
-												   // End expresison since the bracket part of the equation has ended. 
-												   // This should never be reached if there hasn't been a preceeding '('. 
-												   // This should be checked at the tokenisation/recognition/parsing stages.
+			// End expresison since the bracket part of the equation has ended. 
+			// This should never be reached if there hasn't been a preceeding '('. 
+			// This should be checked at the tokenisation/recognition/parsing stages.
 			while (operatorStack.getLength() > 0) { // Pop the remainder of the stack to the output
 				char c = operatorStack.pop();
-				 
 				output->push(c);
 			}
 			return i;

@@ -8,6 +8,7 @@
 
 int main (void)
 {
-	std::string meh = "5 + 5 + 5";
-	Postfix::convertToPostfix(meh);
+	Queue<char> *q = new Queue<char>;
+	std::string foo = "5 + 5 + 5";
+	Postfix::convertToPostfix(foo,0,foo.length(),q);
 }
