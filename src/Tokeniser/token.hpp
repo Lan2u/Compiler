@@ -10,6 +10,6 @@ protected:
 	std::string *value;
 public:
 	virtual *string getType() = 0;
-};
+} Token;
 
 #endif // TOKEN_HPP
