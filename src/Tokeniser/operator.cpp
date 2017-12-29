@@ -8,8 +8,6 @@
 // Create an operator based on the inputted symbol
 Operator::Operator (char symbol)
 {
-	this->symbol = symbol;
-
 	// Assign precidence and type to the operator
 	switch (symbol) {
 	case '!':

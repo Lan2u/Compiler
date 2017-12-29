@@ -29,7 +29,6 @@ private:
 
 	Type type;
 	Precidence precidence;
-	char symbol;
 
 public:
 	Operator (char);
@@ -37,7 +36,6 @@ public:
 	// Getters
 	Type getType (void) const {return type;};
 	Precidence getPrecidence (void) const {return precidence;};
-	char getSymbol (void) const {return symbol;};
 };
 
 #endif // OPERATOR_HPP
