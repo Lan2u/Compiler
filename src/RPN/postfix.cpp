@@ -1,4 +1,4 @@
-// postfix.c
+// postfix.cpp
 // Paul Lancaster and Eva Lott
 // Created	29/12/17
 // Edited	29/12/17
@@ -23,6 +23,6 @@ bool Postfix::comparePrecendence (std::string opr1, std::string opr2)
 }
 
 // Returns a queue with an postfix expression from a string in an infix expression
-Queue<std::string> Postfix::convertToPostfix (std::string str)
+Queue<void*> Postfix::convertToPostfix (std::string str)
 {
 }
