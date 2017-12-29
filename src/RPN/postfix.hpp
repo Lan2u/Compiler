@@ -19,17 +19,17 @@ class Postfix {
 private:
 	// Constant struct to remember precidence
 	const static struct {
+		unsigned short POWER = 5;
 		unsigned short DIVISION = 4;
 		unsigned short MULTIPLICATION = 4;
 		unsigned short REMAINDER = 4;
 		unsigned short ADDITION = 3;
 		unsigned short SUBTRACTION = 3;
-		unsigned short POWER = 5;
-		unsigned short EQUALS = 0;
+		unsigned short COMPARISON = 2;
 		unsigned short NEGATION = 1;
 		unsigned short AND = 1;
 		unsigned short OR = 1;
-		unsigned short COMPARISON = 2;
+		unsigned short EQUALS = 0;
 	} precidence;
 
 	bool isNumber (char);
@@ -37,7 +37,7 @@ private:
 public:
 	static unsigned getOperatorPrecidence (Operator);
 	static bool comparePrecendence (std::string, std::string);
-	static Queue<std::string> convertToPostfix (std::string);
+	static Queue<void*> convertToPostfix (std::string);
 };
 
 enum Operator {
