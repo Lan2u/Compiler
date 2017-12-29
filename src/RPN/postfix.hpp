@@ -14,11 +14,11 @@
 #include <string>
 
 // Constants for order of operations
-// Staic class Postfix
+// Static class Postfix
 class Postfix {
 private:
 	// Constant struct to remember precidence
-	const struct {
+	const static struct {
 		unsigned short DIVISION = 4;
 		unsigned short MULTIPLICATION = 4;
 		unsigned short REMAINDER = 4;
@@ -35,9 +35,13 @@ private:
 	bool isNumber (char);
 
 public:
-	static unsigned getOperatorPrecidence (std::string);
+	static unsigned getOperatorPrecidence (Operator);
 	static bool comparePrecendence (std::string, std::string);
 	static Queue<std::string> convertToPostfix (std::string);
+};
+
+enum Operator {
+	DIVISION, MULTIPLICATION, REMAINDER, ADDITION, SUBTRACTION, POWER, EQUALS, NEGATION, AND, OR, COMPARISON
 };
 
 #endif // POSTFIX_HPP
