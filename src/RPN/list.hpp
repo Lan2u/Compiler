@@ -7,13 +7,19 @@
 // Contains an abstract linked list class and derived
 // classes for stack and queue data structures.
 
+#include <iostream>
+
 // Abstract List class
 template <class Temp>
 class List {
 public:
 	List (void);
 	~List (void);
+	void print (void);
+
 	virtual void push (Temp data);
+
+	// Getters
 	virtual long unsigned getLength (void) {return length;};
 
 protected:
@@ -43,6 +49,15 @@ List<Temp>::~List (void)
 		n = n->next;
 		delete tn;
 	}
+}
+
+// Print list
+template <class Temp>
+void List<Temp>::print (void)
+{
+	Node *n = head;
+	while ((n = n->next) != nullptr)
+		std::cout << n->pos << ":\t" << n->data;	
 }
 
 // Push the tail
