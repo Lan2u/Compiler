@@ -11,8 +11,6 @@
 #include "../Tokeniser/operator.hpp"
 
 #include <string>
-#include <stack>
-#include <queue>
 
 // Static class Postfix
 class Postfix {
@@ -21,7 +19,8 @@ private:
 
 public:
 	static bool comparePrecendence (Operator, Operator);
-	static unsigned convertToPostfix (char*, unsigned, unsigned, std::queue<char>*);
+	static unsigned convertToPostfix (std::string, unsigned, unsigned, Queue<char>*);
+	static unsigned convertToPostfix (char*, unsigned, unsigned, Queue<char>*);
 };
 
 #endif // POSTFIX_HPP

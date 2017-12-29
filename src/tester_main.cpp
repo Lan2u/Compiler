@@ -4,10 +4,10 @@
 // Edited	29/12/17
 // A file with a main method purely for test code
 
-#include "RPN/list.hpp"
-#include "Tokeniser/operator.hpp"
+#include "RPN/postfix.hpp"
 
 int main (void)
 {
-	Operator b('/');
+	std::string meh = "5 + 5 + 5";
+	Postfix::convertToPostfix(meh);
 }

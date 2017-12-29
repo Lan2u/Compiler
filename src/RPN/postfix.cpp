@@ -18,13 +18,20 @@ bool Postfix::isNumber (char c)
 // Returns true if opr1 has a higher precidence than opr2
 bool Postfix::comparePrecendence (Operator opr1, Operator opr2)
 {
-	return (opr1.getPrecidence > opr2.getPrecidence);
+	return (opr1.getPrecidence() > opr2.getPrecidence());
 }
 
-// Appends the postfix expression of the given infix character stream to the given output queue. Returns the last index of the stream read.
-unsigned Postfix::convertToPostfix (char* tokenStream, unsigned expressionStart, unsigned expressionEnd, std::queue<char>* output)
+// Take an std string
+unsigned Postfix::convertToPostfix (std::string tokenStream, unsigned expressionStart, unsigned expressionEnd, Queue<char> *output)
 {
-	std::stack<char> operatorStack;
+	return convertToPostfix(tokenStream.c_str(),expressionStart,expressionEnd,output);
+}
+
+
+// Appends the postfix expression of the given infix character stream to the given output queue. Returns the last index of the stream read.
+unsigned Postfix::convertToPostfix (char* tokenStream, unsigned expressionStart, unsigned expressionEnd, Queue<char> *output)
+{
+	Stack<char> operatorStack;
 
 	for (int i = expressionStart; i <= expressionEnd; i++) {
 		if (isNumber(*(tokenStream + i))) {
@@ -40,17 +47,17 @@ unsigned Postfix::convertToPostfix (char* tokenStream, unsigned expressionStart,
 												   // End expresison since the bracket part of the equation has ended. 
 												   // This should never be reached if there hasn't been a preceeding '('. 
 												   // This should be checked at the tokenisation/recognition/parsing stages.
-			while (operatorStack.size > 0) { // Pop the remainder of the stack to the output
-				char c = operatorStack.pop;
+			while (operatorStack.getLength() > 0) { // Pop the remainder of the stack to the output
+				char c = operatorStack.pop();
 				 
-				output->push;
+				output->push(c);
 			}
 			return i;
 
 		}
 		else {
-			while (operatorStack.size > 0) { // Kick off all equal or higher precedence operators
-				char stackOperator = operatorStack.pop;
+			while (operatorStack.getLength() > 0) { // Kick off all equal or higher precedence operators
+				char stackOperator = operatorStack.pop();
 				if (!comparePrecendence(*(tokenStream + i), stackOperator)) {
 					output->push(stackOperator);
 				}
@@ -62,8 +69,8 @@ unsigned Postfix::convertToPostfix (char* tokenStream, unsigned expressionStart,
 			operatorStack.push(*(tokenStream + i));
 		}
 	}
-	while (operatorStack.size > 0) { // Pop the remainder of the stack to the output
-		output->push(operatorStack.pop);
+	while (operatorStack.getLength() > 0) { // Pop the remainder of the stack to the output
+		output->push(operatorStack.pop());
 	}
 	return expressionEnd;
 }
