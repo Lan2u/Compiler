@@ -3,7 +3,7 @@
 // list.hpp
 // Eva Lott
 // Created	28/12/17
-// Edited	28/12/17
+// Edited	29/12/17
 // Contains an abstract linked list class and derived
 // classes for stack and queue data structures.
 
@@ -20,7 +20,7 @@ public:
 	virtual void push (Temp data);
 
 	// Getters
-	virtual long unsigned getLength (void) {return length;};
+	virtual long unsigned getLength (void) const {return length;};
 
 protected:
 	long unsigned length;
