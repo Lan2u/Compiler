@@ -56,5 +56,7 @@ Operator::Operator (char symbol)
 		type = Type::OR;
 		precidence = Precidence::OR;
 	break;
+	default:
+	break;
 	}
 }

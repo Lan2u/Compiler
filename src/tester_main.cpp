@@ -5,7 +5,9 @@
 // A file with a main method purely for test code
 
 #include "RPN/list.hpp"
+#include "Tokeniser/operator.hpp"
 
 int main (void)
 {
+	Operator b('/');
 }
