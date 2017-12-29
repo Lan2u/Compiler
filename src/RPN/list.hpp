@@ -14,7 +14,7 @@ public:
 	List (void);
 	~List (void);
 	virtual void push (Temp data);
-	virtual long unsigned getLength (void);
+	virtual long unsigned getLength (void) {return length;};
 
 protected:
 	long unsigned length;
@@ -59,11 +59,6 @@ void List<Temp>::push (Temp data)
 	// Set the tail to newNode
 	tail = newNode;
 }
-
-// Getters
-template <class Temp> 
-long unsigned List<Temp>::getLength (void) {return length;}
-
 
 // Stack derived class
 template <class Temp>
