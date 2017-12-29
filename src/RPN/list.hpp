@@ -4,8 +4,7 @@
 // Eva Lott
 // Created	28/12/17
 // Edited	29/12/17
-// Contains an abstract linked list class and derived
-// classes for stack and queue data structures.
+// Contains an abstract linked list class and derived classes for stack and queue data structures.
 
 #include <iostream>
 
