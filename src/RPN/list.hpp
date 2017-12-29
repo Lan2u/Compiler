@@ -27,8 +27,7 @@ protected:
 		Temp data;
 		long unsigned pos;
 		Node *next, *previous;
-	};
-	Node *head, *tail;
+	} *head, *tail;
 };
 
 // Constructor, initialise fields
