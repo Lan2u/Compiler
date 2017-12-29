@@ -22,7 +22,8 @@ protected:
 		Temp data;
 		long unsigned pos;
 		Node *next, *previous;
-	} *head, *tail;
+	};
+	Node *head, *tail;
 };
 
 // Constructor, initialise fields
@@ -79,7 +80,7 @@ Temp Stack<Temp>::pop (void)
 	Temp t = List<Temp>::tail->data;
 
 	// Save the memory location of the old tail
-	List<Temp>::Node n = List<Temp>::tail;
+	typename List<Temp>::Node *tn = List<Temp>::tail;
 	
 	// Set the tail to the previous node and it's next to null
 	List<Temp>::tail = List<Temp>::tail->previous;
@@ -109,7 +110,7 @@ Temp Queue<Temp>::pop (void)
 	Temp t = List<Temp>::head->data;
 
 	// Save the memory location of the old head
-	List<Temp>::Node *tn = List<Temp>::head;
+	typename List<Temp>::Node *tn = List<Temp>::head;
 	
 	// Set the head to the next node and it's previos to null
 	List<Temp>::head = List<Temp>::head->next;
