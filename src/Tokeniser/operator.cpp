@@ -1,5 +1,5 @@
 // operator.cpp
-// Eva Lott
+// Eva Lott, Paul Lancaster
 // Created	29/12/17
 // Edited	29/12/17
 

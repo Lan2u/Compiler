@@ -1,14 +1,15 @@
 #ifndef OPERATOR_HPP
 #define OPERATOR_HPP
 // operator.hpp
-// Eva Lott
+// Eva Lott, Paul Lancaster
 // Created	29/12/17
 // Edited	29/12/17
 // Operator class responsible for defining operators of various types
 
 #include <stdlib.h>
+#include "token.hpp"
 
-class Operator {
+class Operator : public Token{
 private:
 	enum class Type {
 		DIVISION, MULTIPLICATION, REMAINDER, ADDITION, SUBTRACTION, POWER, EQUALS, NEGATION, AND, OR, COMPARISON

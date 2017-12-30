@@ -9,7 +9,8 @@ class Token {
 protected:
 	std::string *value;
 public:
-	virtual *string getType() = 0;
-} Token;
+	virtual std::string* getValue() = 0;
+};
+
 
 #endif // TOKEN_HPP
