@@ -21,17 +21,10 @@ bool Postfix::comparePrecendence (Operator opr1, Operator opr2)
 	return (opr1.getPrecidence() > opr2.getPrecidence());
 }
 
-// Take an std string
-unsigned Postfix::convertToPostfix (std::string tokenStream, unsigned expressionStart, unsigned expressionEnd, Queue<char> *output)
-{
-	return convertToPostfix(tokenStream.c_str(),expressionStart,expressionEnd,output);
-}
-
-
 // Appends the postfix expression of the given infix character stream to the given output queue. Returns the last index of the stream read.
-unsigned Postfix::convertToPostfix (char* tokenStream, unsigned expressionStart, unsigned expressionEnd, Queue<char> *output)
+unsigned Postfix::convertToPostfix (std::string tokenStream, unsigned expressionStart, unsigned expressionEnd, Queue<void*> *output)
 {
-	Stack<char> operatorStack;
+	Stack<Operator*> operatorStack;
 
 	for (int i = expressionStart; i <= expressionEnd; i++) {
 		if (isNumber(*(tokenStream + i))) {
@@ -65,7 +58,7 @@ unsigned Postfix::convertToPostfix (char* tokenStream, unsigned expressionStart,
 					break;
 				}
 			}
-			operatorStack.push(*(tokenStream + i));
+			operatorStack->push(*(tokenStream + i));
 		}
 	}
 	while (operatorStack.getLength() > 0) { // Pop the remainder of the stack to the output

@@ -55,6 +55,9 @@ Operator::Operator (char symbol)
 		precidence = Precidence::OR;
 	break;
 	default:
+		// An invalid operator has been used
+		// TODO: Possibly create an error system... If the user accidentally uses x instead of * we could possibly show them where?
+		exit (EXIT_FAILURE);
 	break;
 	}
 }

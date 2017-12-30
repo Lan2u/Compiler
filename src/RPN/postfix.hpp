@@ -19,8 +19,7 @@ private:
 
 public:
 	static bool comparePrecendence (Operator, Operator);
-	static unsigned convertToPostfix (std::string, unsigned, unsigned, Queue<char>*);
-	static unsigned convertToPostfix (char*, unsigned, unsigned, Queue<char>*);
+	static unsigned convertToPostfix (std::string, unsigned, unsigned, Queue<void*>*);
 };
 
 #endif // POSTFIX_HPP

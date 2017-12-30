@@ -6,6 +6,8 @@
 // Edited	29/12/17
 // Operator class responsible for defining operators of various types
 
+#include <stdlib.h>
+
 class Operator {
 private:
 	enum class Type {
