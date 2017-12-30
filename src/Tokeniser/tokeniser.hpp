@@ -25,6 +25,8 @@ public:
 	void addTransition(std::string, State*);
 	State* getNext(std::string);
 	void setAccepting(Token*);
+	bool isAccepting();
+	Token* getToken() { return acceptingTokenType; }
 };
 
 /*
@@ -39,7 +41,7 @@ private:
 	Token * getAcceptingTokenType(std::string);
 public:
 	Tokeniser(std::string fsaDefinitionFilePath);
-	Queue<Token>* tokeniseString(std::string);
+	Token* tokeniseString(std::string);
 	void reset();
 };
 #endif // TOKENISER_HPP

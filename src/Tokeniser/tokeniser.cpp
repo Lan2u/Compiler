@@ -65,14 +65,23 @@ Tokeniser::Tokeniser(std::string fsaDefinitionFilePath){
 
 }
 
-Queue<Token>* Tokeniser::tokeniseString(std::string str)
+// Tokenises the given string and returns the tokenised result.
+Token* Tokeniser::tokeniseString(std::string str)
 {
 	reset();
 	for (int i = 0; i < str.length; i++) {
 		currentState = currentState->getNext(str.at[i]);
 	}
-
-
+	
+	if (currentState->isAccepting()) {
+		Token* token = currentState->getToken();
+		token->getValue = str;
+		return token;
+	}
+	else {
+		// TODO invalid token encountered
+		exit(EXIT_FAILURE);
+	}
 }
 
 void Tokeniser::reset()
@@ -84,6 +93,11 @@ State::State(std::string id)
 {
 	stateId = id; 
 	acceptingTokenType = nullptr;
+}
+
+// Return true if the state is an accepting state.
+bool State::isAccepting() {
+	return (acceptingTokenType != nullptr);
 }
 
 void State::setAccepting(Token* type) {

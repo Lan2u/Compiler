@@ -1,5 +1,5 @@
 // preprocessor.cpp
-// Eva Lott
+// Eva Lott and Paul Lancaster
 // Created	30/12/17
 // Edited	30/12/17
 
