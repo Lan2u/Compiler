@@ -1,4 +1,6 @@
-// file_to_queue_test.hpp
+#ifndef PREPROCESSOR_HPP
+#define PREPROCESSOR_HPP
+// preprocessor.hpp
 // Eva Lott
 // Created	30/12/17
 // Edited	30/12/17
@@ -7,10 +9,13 @@
 #include <string>
 #include <fstream>
 
-#include "RPN/list.hpp"
+#include "../RPN/postfix.hpp"
+#include "../RPN/list.hpp"
 
-class FileIO {
+class Preprocessor {
 private:
 public:
 	static Queue<std::string>* getFileContents (std::string);
 };
+
+#endif // PREPROCESSOR_HPP

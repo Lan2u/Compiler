@@ -14,12 +14,10 @@
 
 // Static class Postfix
 class Postfix {
-private:
-	static bool isNumber (char);
-
 public:
 	static bool comparePrecendence (Operator, Operator);
 	static unsigned convertToPostfix (std::string, unsigned, unsigned, Queue<void*>*);
+	static bool isNumber (char);
 };
 
 #endif // POSTFIX_HPP

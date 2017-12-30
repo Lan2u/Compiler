@@ -1,9 +1,9 @@
-// file_to_queue_test.cpp
+// preprocessor.cpp
 // Eva Lott
 // Created	30/12/17
 // Edited	30/12/17
 
-#include "file_to_queue_test.hpp"
+#include "preprocessor.hpp"
 
 using namespace std;
 
@@ -25,8 +25,9 @@ Queue<string>* getFileContents (string filename)
 		if (str.length() == 1)
 			queue->push(str);
 		
+		// The string is multiple characters, which could be multiple operators not seperarated by
 		else {
-			if (!RPN::isNumber(str[0]))
+			if (!Postfix::isNumber(str[0]))
 		}
     }
 	
