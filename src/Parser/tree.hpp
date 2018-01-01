@@ -3,6 +3,7 @@
 template <class T>
 class Node {
 public:
+	Node<T>();
 	Node<T>* left;
 	Node<T>* right;
 	Queue<T*>* getPostfixRepresentation();
@@ -16,6 +17,7 @@ class BinaryTree {
 private:
 	Node<X> root;
 public:
+	BinaryTree();
 	Queue<X*>* getPostfixRepresentation();
 	void add(X*);
 	void remove(X*);
