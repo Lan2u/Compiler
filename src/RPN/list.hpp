@@ -9,14 +9,14 @@
 #include <iostream>
 
 // Abstract List class
-template <class Temp>
+template <class T>
 class List {
 public:
 	List (void);
 	~List (void);
 	virtual void print (void);
 
-	virtual void push (Temp data);
+	virtual void push (T data);
 
 	// Getters
 	virtual long unsigned getLength (void) const {return length;};
@@ -24,15 +24,15 @@ public:
 protected:
 	long unsigned length;
 	struct Node {
-		Temp data;
+		T data;
 		long unsigned pos;
 		Node *next, *previous;
 	} *head, *tail;
 };
 
 // Constructor, initialise fields
-template <class Temp>
-List<Temp>::List (void)
+template <class T>
+List<T>::List (void)
 {
 	length = 0;
 	head = nullptr;
@@ -40,8 +40,8 @@ List<Temp>::List (void)
 }
 
 // Destructor, destroy nodes
-template <class Temp>
-List<Temp>::~List (void)
+template <class T>
+List<T>::~List (void)
 {
 	Node *n = head, *tn;
 	while ((tn = n) != nullptr) {
@@ -51,8 +51,8 @@ List<Temp>::~List (void)
 }
 
 // Print list
-template <class Temp>
-void List<Temp>::print (void)
+template <class T>
+void List<T>::print (void)
 {
 	Node *n = head;
 	while (n != nullptr) {
@@ -62,8 +62,8 @@ void List<Temp>::print (void)
 }
 
 // Push the tail
-template <class Temp>
-void List<Temp>::push (Temp data)
+template <class T>
+void List<T>::push (T data)
 {
 	// Create a new node and set it's fields
 	Node *newNode = new Node;
@@ -82,71 +82,71 @@ void List<Temp>::push (Temp data)
 }
 
 // Stack derived class
-template <class Temp>
-class Stack : public List<Temp> {
+template <class T>
+class Stack : public List<T> {
 public:
-	Temp pop (void);
+	T pop (void);
 };
 
 // Pop the value of the tail then destroy it
-template <class Temp>
-Temp Stack<Temp>::pop (void)
+template <class T>
+T Stack<T>::pop (void)
 {
 	// Save the value of temp for return later
-	Temp t = List<Temp>::tail->data;
+	T t = List<T>::tail->data;
 
 	// Save the memory location of the old tail
-	typename List<Temp>::Node *tn = List<Temp>::tail;
+	typename List<T>::Node *tn = List<T>::tail;
 
 	// Set the tail to the previous node and it's next to null
-	List<Temp>::tail = List<Temp>::tail->previous;
-	List<Temp>::tail->next = nullptr;
+	List<T>::tail = List<T>::tail->previous;
+	List<T>::tail->next = nullptr;
 
 	// Delete the old tail
 	delete tn;
 
-	--List<Temp>::length;
+	--List<T>::length;
 
 	// Return the old data value
 	return t;
 }
 
 // Queue derived class
-template <class Temp>
-class Queue : public List<Temp> {
+template <class T>
+class Queue : public List<T> {
 public:
-	Temp pop (void);
-	void append(Queue<Temp>);
+	T pop (void);
+	void append(Queue<T>);
 };
 
 // O(1) time complexity appending of the given queue to the end of this queue
 // Does not update the pos because that would be an O(k) operation where k is
 // the length of the queue being appended
-template <class Temp>
-void Queue<Temp>::append(Queue<Temp>* queue){
+template <class T>
+void Queue<T>::append(Queue<T>* queue){
 	queue->head->previous = tail;
 	tail->next = queue->head;
 	length = length + queue->getLength();
 }
 
 // Pop the value of the head then destroy it
-template <class Temp>
-Temp Queue<Temp>::pop (void)
+template <class T>
+T Queue<T>::pop (void)
 {
 	// Save the value of temp for return later
-	Temp t = List<Temp>::head->data;
+	T t = List<T>::head->data;
 
 	// Save the memory location of the old head
-	typename List<Temp>::Node *tn = List<Temp>::head;
+	typename List<T>::Node *tn = List<T>::head;
 
 	// Set the head to the next node and it's previos to null
-	List<Temp>::head = List<Temp>::head->next;
-	List<Temp>::head->previous = nullptr;
+	List<T>::head = List<T>::head->next;
+	List<T>::head->previous = nullptr;
 
 	// Delete the old tail
 	delete tn;
 
-	--List<Temp>::length;
+	--List<T>::length;
 
 	// Return the old data value
 	return t;
