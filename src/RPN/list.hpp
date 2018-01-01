@@ -1,7 +1,7 @@
 #ifndef LIST_HPP
 #define LIST_HPP
 // list.hpp
-// Eva Lott
+// Eva Lott, Paul Lancaster
 // Created	28/12/17
 // Edited	29/12/17
 // Contains an abstract linked list class and derived classes for stack and queue data structures.
@@ -40,7 +40,7 @@ List<Temp>::List (void)
 }
 
 // Destructor, destroy nodes
-template <class Temp> 
+template <class Temp>
 List<Temp>::~List (void)
 {
 	Node *n = head, *tn;
@@ -62,9 +62,9 @@ void List<Temp>::print (void)
 }
 
 // Push the tail
-template <class Temp> 
+template <class Temp>
 void List<Temp>::push (Temp data)
-{	
+{
 	// Create a new node and set it's fields
 	Node *newNode = new Node;
 	newNode->data = data;
@@ -97,7 +97,7 @@ Temp Stack<Temp>::pop (void)
 
 	// Save the memory location of the old tail
 	typename List<Temp>::Node *tn = List<Temp>::tail;
-	
+
 	// Set the tail to the previous node and it's next to null
 	List<Temp>::tail = List<Temp>::tail->previous;
 	List<Temp>::tail->next = nullptr;
@@ -116,7 +116,18 @@ template <class Temp>
 class Queue : public List<Temp> {
 public:
 	Temp pop (void);
+	void append(Queue<Temp>);
 };
+
+// O(1) time complexity appending of the given queue to the end of this queue
+// Does not update the pos because that would be an O(k) operation where k is
+// the length of the queue being appended
+template <class Temp>
+void Queue<Temp>::append(Queue<Temp>* queue){
+	queue->head->previous = tail;
+	tail->next = queue->head;
+	length = length + queue->getLength();
+}
 
 // Pop the value of the head then destroy it
 template <class Temp>
@@ -127,7 +138,7 @@ Temp Queue<Temp>::pop (void)
 
 	// Save the memory location of the old head
 	typename List<Temp>::Node *tn = List<Temp>::head;
-	
+
 	// Set the head to the next node and it's previos to null
 	List<Temp>::head = List<Temp>::head->next;
 	List<Temp>::head->previous = nullptr;

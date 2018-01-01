@@ -1,15 +1,22 @@
 #include "../RPN/list.hpp"
 #include "../Tokeniser/token.hpp"
+template <class T>
 class Node {
 public:
-	Node* left;
-	Node* right;
+	Node<T>* left;
+	Node<T>* right;
+	Queue<T*>* getPostfixRepresentation();
+	T* getElement() {return element};
+private:
+	T* element;
 };
 
-class Tree {
+template <class X>
+class BinaryTree {
 private:
-	Node root;
+	Node<X> root;
 public:
-	Token * getPostfixRepresentation(); // TODO (See RPN)
-	
+	Queue<X*>* getPostfixRepresentation();
+	void add(X*);
+	void remove(X*);
 };
