@@ -116,7 +116,7 @@ template <class T>
 class Queue : public List<T> {
 public:
 	T pop (void);
-	void append(Queue<T>);
+	void append(Queue<T>*);
 };
 
 // O(1) time complexity appending of the given queue to the end of this queue

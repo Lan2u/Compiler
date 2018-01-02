@@ -2,17 +2,11 @@
 
 class Number : public Token {
 public:
-	Number(std::string* val) : Token(val);
-	virtual *string getType() =0;
+	Number(std::string* val);
 };
 
 class Integer : public Number {
 protected:
-	static const std::string type = "INTEGER";
 public:
-	Integer(string* val) : Number(val) {};
+	Integer(std::string* val) : Number(val) {};
 };
-
-*string Integer::getType() {
-	return type;
-}

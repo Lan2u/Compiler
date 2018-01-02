@@ -1,9 +1,7 @@
-// operator.cpp
 // Eva Lott, Paul Lancaster
 // Created	29/12/17
-// Edited	29/12/17
 
-#include "operator.hpp"
+#include "token.hpp"
 
 // Create an operator based on the inputted symbol
 Operator::Operator (char symbol)
@@ -56,7 +54,7 @@ Operator::Operator (char symbol)
 	break;
 	default:
 		// An invalid operator has been used
-		// TODO: Possibly create an error system... If the user accidentally uses x instead of * we could possibly show them where?
+		// TODO: Create an error system... If the user accidentally uses x instead of * we could possibly show them where?
 		exit (EXIT_FAILURE);
 	break;
 	}

@@ -29,7 +29,7 @@ Tokeniser::Tokeniser(std::string fsaDefinitionFilePath){
 		std::stringstream strStream(definitionLine);
 		
 		std::string initialStateId;
-		std::string input;
+		std::string input; // Should be singular character
 		std::string finalStateId;
 		std::string acceptingTokenTypeStr;
 		
@@ -40,13 +40,13 @@ Tokeniser::Tokeniser(std::string fsaDefinitionFilePath){
 		// TODO handle there not being 4 pieces of the definition
 		strStream >> acceptingTokenTypeStr;
 
-		State* initialState = findState(initialStateId);
+		State* initialState = findState(initialStateId, &states);
 		if (initialState == nullptr) {
 			initialState = new State(initialStateId);
 			states.push(initialState);
 		}
 
-		State* finalState = findState(finalStateId);
+		State* finalState = findState(finalStateId, &states);
 		if (finalState == nullptr) {
 			finalState = new State(finalStateId);
 			states.push(finalState);
@@ -58,9 +58,7 @@ Tokeniser::Tokeniser(std::string fsaDefinitionFilePath){
 			finalState->setAccepting(tokenType);
 		}
 		
-		
-
-		initialState->addTransition(input, finalState);
+		initialState->addTransition(input.at(0), finalState);
 	}
 
 }
@@ -70,12 +68,12 @@ Token* Tokeniser::tokeniseString(std::string str)
 {
 	reset();
 	for (int i = 0; i < str.length; i++) {
-		currentState = currentState->getNext(str.at[i]);
+		currentState = currentState->getNext(str.at(i));
 	}
 	
 	if (currentState->isAccepting()) {
-		Token* token = currentState->getToken();
-		token->getValue = str;
+		Token* token = currentState->getInstanceOfToken();
+		token->setValue(str);
 		return token;
 	}
 	else {
@@ -104,12 +102,12 @@ void State::setAccepting(Token* type) {
 	acceptingTokenType = type;
 }
 
-void State::addTransition(std::string input, State * finalState)
+void State::addTransition(char input, State * finalState)
 {
 	transitions.insert({ input, finalState });
 }
 
-State * State::getNext(std::string input)
+State * State::getNext(char input)
 {
 	State* next = transitions[input];
 	if (next == nullptr) {

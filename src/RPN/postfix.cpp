@@ -1,24 +1,23 @@
-// postfix.cpp
 // Paul Lancaster and Eva Lott
 // Created	29/12/17
-// Edited	29/12/17
 // Function definitions for class Postfix
 
 #include "postfix.hpp"
-
-#define BRACKET_OPEN_SYMBOL 40
-#define BRACKET_CLOSE_SYMBOL 41
-
 // Checks if a given char denotes a number
-bool Postfix::isNumber (char c)
+bool Postfix::isNumber(char c)
 {
 	return (c >= 48 && c <= 57);
 }
 
+
+/* Commented out for the time being as not currently needed. Code may be useful later however.
+#define BRACKET_OPEN_SYMBOL 40
+#define BRACKET_CLOSE_SYMBOL 41
+
 // Returns true if opr1 has a higher precidence than opr2
-bool Postfix::comparePrecendence (Operator opr1, Operator opr2)
+bool Postfix::comparePrecendence(Operator * opr1, Operator * opr2)
 {
-	return (opr1.getPrecidence() > opr2.getPrecidence());
+	return (opr1->getPrecidence() > opr2->getPrecidence());
 }
 
 // Appends the postfix expression of the given infix character stream to the given output queue. Returns the last index of the stream read.
@@ -66,3 +65,5 @@ unsigned Postfix::convertToPostfix (std::string tokenStream, unsigned expression
 	}
 	return expressionEnd;
 }
+
+*/

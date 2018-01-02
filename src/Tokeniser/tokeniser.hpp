@@ -5,28 +5,28 @@
 
 // Paul Lancaster
 
-#include "token.hpp"
 #include <string>
 #include <unordered_map>
 #include "../RPN/list.hpp"
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include "token.hpp"
 
 // Representation of a state within the nFSA. 
 class State {
 private:
 	// Represents the state transition function of the FSA for this state
-	std::unordered_map<std::string, State*> transitions;
+	std::unordered_map<char, State*> transitions;
 	std::string stateId;
 	Token* acceptingTokenType;
 public: 
 	State(std::string id);
-	void addTransition(std::string, State*);
-	State* getNext(std::string);
+	void addTransition(char, State*);
+	State* getNext(char);
 	void setAccepting(Token*);
 	bool isAccepting();
-	Token* getToken() { return acceptingTokenType; }
+	Token* getInstanceOfToken(); // TODO. Should return a new instance of the token that is recognised by reaching this state.
 };
 
 /*

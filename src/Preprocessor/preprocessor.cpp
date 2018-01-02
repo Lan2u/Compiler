@@ -1,7 +1,5 @@
-// preprocessor.cpp
 // Eva Lott and Paul Lancaster
 // Created	30/12/17
-// Edited	30/12/17
 
 #include "preprocessor.hpp"
 
@@ -21,16 +19,8 @@ Queue<string>* getFileContents (string filename)
 	// Loop through words
 	while (file >> str)
     {
-		// The string is a single character
-		if (str.length() == 1)
-			queue->push(str);
-		
-		// The string is multiple characters, which could be multiple operators not seperarated by
-		else {
-			if (!Postfix::isNumber(str[0]))
-		}
+		queue->push(str);
     }
 	
-	
-
+	file.close();
 }

@@ -37,14 +37,14 @@ Queue<T*>* Node<T>::getPostfixRepresentation(void){
   }
   queue->push(this.getElement());
   return queue;
-}
+};
 
 template <class T>
 Node<T>::Node(T ele){
   element = ele;
   left = nullptr;
   right = nullptr;
-}
+};
 
 template <class X>
 class BinaryTree {
@@ -61,7 +61,5 @@ template <class X>
 Queue<X*>* BinaryTree<X>::getPostfixRepresentation(void){
   return root->getPostfixRepresentation();
 }
-
-Queue<X*>* BinaryTree::getPostfixRepresentation() {
 
 #endif // TREE_HPP

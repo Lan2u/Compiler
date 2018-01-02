@@ -8,14 +8,14 @@
 // Brackets>Powers>Order>Division>Multiplication>Addition>Subtraction
 
 #include "list.hpp"
-#include "../Tokeniser/operator.hpp"
+#include "../Tokeniser/token.hpp"
 
 #include <string>
 
 // Static class Postfix
 class Postfix {
 public:
-	static bool comparePrecendence (Operator, Operator);
+	static bool comparePrecendence (Operator*, Operator*);
 	static unsigned convertToPostfix (std::string, unsigned, unsigned, Queue<void*>*);
 	static bool isNumber (char);
 };
