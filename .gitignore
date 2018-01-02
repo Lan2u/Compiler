@@ -286,3 +286,11 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+
+#Added manually. Visual 2017
+*.vcxproj
+*.vcxproj.filters
+*.sln
+.vscode
+.vs
+
