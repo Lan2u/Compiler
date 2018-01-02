@@ -9,9 +9,9 @@ class Node {
 public:
 	Node<T>(void); // If you want a constructor for the case where no parameter is given on object initialisation
 
-	// NOTE : a function declaration in C++ is somewhat interesting. If you declare a function with foo() then declare and object foo(anydatatype),
+	// NOTE : a function declaration in C++ is somewhat interesting. If you declare a function with foo() then initialise and object with foo(anydatatype),
 	// as long as foo hasn't got an alternate constructor to work with foo(anydatatype), foo() will be used.
-	// To ensure safety it's ofter standard to declare with foo(void) which ensures that when foo() is declared it will run the foo(void) constructor,
+	// To ensure safety it's standard to declare with foo(void) which ensures that when foo() is declared it will run the foo(void) constructor,
 	// ensuring foo(anydatatype) will only work with constructors of foo(anydatatype);
 	
 	Node<T>(T);
