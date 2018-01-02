@@ -6,22 +6,15 @@
 class Parser {
 public:
 	// Parses the given token stream and returns the produced parse tree. 
-	Tree parseTokenStream(Token* tokenStream); // TODO
+	BinaryTree<Token> parseTokenStream(Token* tokenStream); // TODO
 };
 
-class Declaration {
+class Recogniser {
 public:
-	// Return true if the given non-terminal is recognised in the token stream and false if not. 
-	// The token stream is reset to the starting position if not recognised.
-	bool static recognise(TokenStreamIterator*);
-};
+	// Return true if the given terminal/non-terminal is recognised in the token stream and false 
+	// if not. The token stream is reset to the starting position if not recognised.
+	bool recogniseDeclaration(Token* tokenStream);
+	bool recogniseNumber(Token* tokenStream);
+	bool recogniseOperator(Token* tokenStream);
 
-class Number {
-public:
-	bool static recognise(TokenStreamIterator*);
-};
-
-class Operator {
-public:
-	bool static recognise(TokenStreamIterator*);
 };
