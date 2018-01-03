@@ -2,11 +2,11 @@
 #include "../Tokeniser/token.hpp"
 #include "tokenStreamIterator.hpp"
 #include "tree.hpp"
-
+/*
 class Parser {
 public:
 	// Parses the given token stream and returns the produced parse tree. 
-	BinaryTree<Token> parseTokenStream(Token* tokenStream); // TODO
+	//BinaryTree<Token> parseTokenStream(Token* tokenStream); // TODO
 };
 
 class Recogniser {
@@ -18,3 +18,4 @@ public:
 	bool recogniseOperator(Token* tokenStream);
 
 };
+*/

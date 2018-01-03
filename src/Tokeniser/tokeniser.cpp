@@ -67,7 +67,7 @@ Tokeniser::Tokeniser(std::string fsaDefinitionFilePath){
 Token* Tokeniser::tokeniseString(std::string str)
 {
 	reset();
-	for (int i = 0; i < str.length; i++) {
+	for (int i = 0; i < str.length(); i++) {
 		currentState = currentState->getNext(str.at(i));
 	}
 	
