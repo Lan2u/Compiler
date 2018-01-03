@@ -98,6 +98,11 @@ bool State::isAccepting() {
 	return (acceptingTokenType != nullptr);
 }
 
+Token * State::getInstanceOfToken()
+{
+	return nullptr;
+}
+
 void State::setAccepting(Token* type) {
 	acceptingTokenType = type;
 }
