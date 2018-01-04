@@ -2,7 +2,7 @@
 // Unit tests.
 #define BOOST_TEST_MODULE Main Tests
 #include <boost/test/included/unit_test.hpp>
-#include "../RPN/list.hpp"
+#include "../Data Structures/data_structures.hpp"
 
 BOOST_AUTO_TEST_CASE(test_to_make_sure_tests_work) {
 	int i = 1 + 1;

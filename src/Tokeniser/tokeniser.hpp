@@ -7,7 +7,7 @@
 
 #include <string>
 #include <unordered_map>
-#include "../RPN/list.hpp"
+#include "../Data Structures/data_structures.hpp"
 #include <fstream>
 #include <iostream>
 #include <sstream>
