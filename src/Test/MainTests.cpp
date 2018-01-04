@@ -3,12 +3,62 @@
 #define BOOST_TEST_MODULE Main Tests
 #include <boost/test/included/unit_test.hpp>
 #include "../Data Structures/data_structures.hpp"
+#include "../Tokeniser/tokeniser.hpp"
 
 BOOST_AUTO_TEST_CASE(test_to_make_sure_tests_work) {
 	int i = 1 + 1;
 	BOOST_TEST(i == 2);
 	//BOOST_TEST(i == 1);
 }
+
+BOOST_AUTO_TEST_SUITE(ListTests)
+
+BOOST_AUTO_TEST_CASE(List_Create_Test) {
+	List<int> l;
+	BOOST_TEST(l.getLength() == 0);
+}
+
+BOOST_AUTO_TEST_CASE(List_Push_Test) {
+	List<int> l;
+	int a = 10;
+	l.push(a);
+	BOOST_TEST(l.getLength() == 1);
+}
+
+BOOST_AUTO_TEST_CASE(List_Push_One_Contains_Test) {
+	List<int> l;
+	int a = 10;
+	l.push(a);
+	BOOST_TEST(l.contains(a));
+}
+
+BOOST_AUTO_TEST_CASE(List_Push_One_No_Contains_Test) {
+	List<int> l;
+	int a = 10;
+	int b = 0;
+
+	l.push(a);
+	BOOST_TEST(l.contains(b) == false);
+}
+
+BOOST_AUTO_TEST_CASE(List_Empty_Contains_Test) {
+	List<int> l;
+	int b = 0;
+
+	BOOST_TEST(l.contains(b) == false);
+}
+
+BOOST_AUTO_TEST_SUITE_END()
+
+BOOST_AUTO_TEST_SUITE(TokeniserTests)
+
+BOOST_AUTO_TEST_CASE(Tokeniser_Tokenise_Int_Test) {
+	std::string fsaDefPath = "tokeniserDef.fsa";
+	Tokeniser tokeniser(fsaDefPath);
+
+}
+
+BOOST_AUTO_TEST_SUITE_END()
 
 BOOST_AUTO_TEST_SUITE(QueueTests)
 

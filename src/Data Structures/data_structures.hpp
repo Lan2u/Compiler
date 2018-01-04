@@ -18,6 +18,8 @@ public:
 
 	virtual void push (T data);
 
+	virtual bool contains(T element);
+
 	// Getters
 	virtual long unsigned getLength (void) const {return length;};
 
@@ -79,6 +81,20 @@ void List<T>::push (T data)
 		tail->next = newNode;
 		tail = newNode;
 	}
+}
+
+// Check if the list contains an element
+template<class T>
+inline bool List<T>::contains(T element)
+{
+	Node* node = head;
+	while (node != nullptr) {
+		if (node->data == element) {
+			return true;
+		}
+		node = node->next;
+	}
+	return false;
 }
 
 // Stack derived class

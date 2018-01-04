@@ -37,10 +37,18 @@ class Tokeniser {
 private:
 	State * initialState;
 	State * currentState;
-	State * Tokeniser::findState(std::string, List<State*>*);
+
+	/* A list of all the states in the fsa in the tokeniser. This information could be got by doing a state traversal however that
+	is an O(n) operation which is very slow if this needs to be done for each new state as this would cause O(n^2) complexity. */
+	List<State*> states;
+
+	/* Finds the given state in the list */
+	State * Tokeniser::findState(std::string);
 	Token * getAcceptingTokenType(std::string);
 public:
 	Tokeniser(std::string fsaDefinitionFilePath);
+	// Adds a transition to the tokeniser. Generates the states as needed.
+	void addTransition(std::string);
 	Token* tokeniseString(std::string);
 	void reset();
 };
