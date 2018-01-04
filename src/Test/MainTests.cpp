@@ -14,26 +14,26 @@ BOOST_AUTO_TEST_CASE(test_to_make_sure_tests_work) {
 BOOST_AUTO_TEST_SUITE(ListTests)
 
 BOOST_AUTO_TEST_CASE(List_Create_Test) {
-	List<int> l;
+	DoubleLinkedList<int> l;
 	BOOST_TEST(l.getLength() == 0);
 }
 
 BOOST_AUTO_TEST_CASE(List_Push_Test) {
-	List<int> l;
+	DoubleLinkedList<int> l;
 	int a = 10;
 	l.push(a);
 	BOOST_TEST(l.getLength() == 1);
 }
 
 BOOST_AUTO_TEST_CASE(List_Push_One_Contains_Test) {
-	List<int> l;
+	DoubleLinkedList<int> l;
 	int a = 10;
 	l.push(a);
 	BOOST_TEST(l.contains(a));
 }
 
 BOOST_AUTO_TEST_CASE(List_Push_One_No_Contains_Test) {
-	List<int> l;
+	DoubleLinkedList<int> l;
 	int a = 10;
 	int b = 0;
 
@@ -42,7 +42,7 @@ BOOST_AUTO_TEST_CASE(List_Push_One_No_Contains_Test) {
 }
 
 BOOST_AUTO_TEST_CASE(List_Empty_Contains_Test) {
-	List<int> l;
+	DoubleLinkedList<int> l;
 	int b = 0;
 
 	BOOST_TEST(l.contains(b) == false);
