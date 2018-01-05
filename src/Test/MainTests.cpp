@@ -76,8 +76,7 @@ BOOST_AUTO_TEST_CASE(StateContainer_Add_5_Find_State_Test) {
 }
 
 BOOST_AUTO_TEST_SUITE_END()
-
-
+ 
 BOOST_AUTO_TEST_SUITE(ListTests)
 
 BOOST_AUTO_TEST_CASE(List_Create_Test) {
