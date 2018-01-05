@@ -1,7 +1,7 @@
 #ifndef TREE_HPP
 #define TREE_HPP
 
-#include "../Data Structures/data_structures.hpp"
+#include "../Data Structures/queue.hpp"
 #include "../Tokeniser/token.hpp"
 
 /*

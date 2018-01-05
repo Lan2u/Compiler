@@ -12,7 +12,7 @@
 #include <iostream>
 #include <sstream>
 #include "token.hpp"
-#include "../Data Structures/data_structures.hpp"
+#include "../Data Structures/queue.hpp"
 #include <vector>
 
 // Representation of a state within the nFSA. 
