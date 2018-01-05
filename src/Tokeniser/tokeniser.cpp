@@ -81,6 +81,15 @@ Token* Tokeniser::tokeniseString(std::string str)
 	}
 }
 
+Tokeniser::Tokeniser(void) {
+	reset();
+}
+
+void Tokeniser::setInitialState(std::string stateId){
+	State* initState = states.findStateById(stateId);
+	initialState = initState;
+}
+
 void Tokeniser::reset()
 {
 	currentState = initialState;
@@ -101,6 +110,7 @@ Token * State::getInstanceOfToken()
 {
 	return nullptr;
 }
+
 
 void State::setAccepting(Token* type) {
 	acceptingTokenType = type;
@@ -141,12 +151,12 @@ State * StateContainer::findStateById(std::string id) {
 		}
 		node = node->next;
 	}
+	throw new State_Not_Found_Exception;
 }
 
 std::vector<State*> StateContainer::findStatesById(std::string, std::string)
 {
-	std::vector<State*> result = {};
-	return result;
+	throw new State_Not_Found_Exception; // TODO Implemenetation of this method
 }
 
 int StateContainer::getLength()

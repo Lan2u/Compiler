@@ -14,6 +14,7 @@
 #include "token.hpp"
 #include "../Data Structures/queue.hpp"
 #include <vector>
+#include <exception>
 
 // Representation of a state within the nFSA. 
 class State {
@@ -30,6 +31,12 @@ public:
 	void setAccepting(Token*);
 	bool isAccepting();
 	Token* getInstanceOfToken(); // TODO. Should return a new instance of the token that is recognised by reaching this state.
+};
+
+class State_Not_Found_Exception : public _exception {
+	virtual const char* what() const throw() {
+		return "The state wasn't found!";
+	}
 };
 
 /* Container for the states. This relys on the objects being pointers to states. Bad things happen if they aren't.
@@ -62,10 +69,13 @@ private:
 	StateContainer states;
 	Token * getAcceptingTokenType(std::string);
 public:
+	Tokeniser(void);
 	Tokeniser(std::string fsaDefinitionFilePath);
 	// Adds a transition to the tokeniser. Generates the states as needed.
 	void addTransition(std::string);
 	Token* tokeniseString(std::string);
+	// Sets the initial state. 
+	void Tokeniser::setInitialState(std::string stateId);
 	void reset();
 };
 #endif // TOKENISER_HPP

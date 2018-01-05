@@ -151,6 +151,13 @@ BOOST_AUTO_TEST_CASE(Tokeniser_Tokenise_Int_Test) {
 
 }
 
+BOOST_AUTO_TEST_CASE(Tokeniser_Add_) {
+	Tokeniser t;
+	std::string str = ""; // TODO write a demo state transition.
+	t.addTransition(str);
+
+}
+
 BOOST_AUTO_TEST_SUITE_END()
 
 BOOST_AUTO_TEST_SUITE(QueueTests)
