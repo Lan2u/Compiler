@@ -7,11 +7,12 @@
 
 #include <string>
 #include <unordered_map>
-#include "../RPN/list.hpp"
+#include "../Data Structures/data_structures.hpp"
 #include <fstream>
 #include <iostream>
 #include <sstream>
 #include "token.hpp"
+#include "../Data Structures/data_structures.hpp"
 
 // Representation of a state within the nFSA. 
 class State {
@@ -37,11 +38,27 @@ class Tokeniser {
 private:
 	State * initialState;
 	State * currentState;
-	State * Tokeniser::findState(std::string, List<State*>*);
+
+	/* A list of all the states in the fsa in the tokeniser. This information could be got by doing a state traversal however that
+	is an O(n) operation which is very slow if this needs to be done for each new state as this would cause O(n^2) complexity. */
+	DoubleLinkedList<State*> states;
+
+	/* Finds the given state in the list */
+	State * Tokeniser::findState(std::string);
 	Token * getAcceptingTokenType(std::string);
 public:
 	Tokeniser(std::string fsaDefinitionFilePath);
+	// Adds a transition to the tokeniser. Generates the states as needed.
+	void addTransition(std::string);
 	Token* tokeniseString(std::string);
 	void reset();
 };
+
+// Container for the states. Abstracted out so can be modified as needed to improve performance later. 
+// // Currently backed by a doubly linked list.
+template <class T>
+class StateContainer : public DoubleLinkedList<T>{ 
+	
+};
+
 #endif // TOKENISER_HPP

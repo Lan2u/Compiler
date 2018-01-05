@@ -8,15 +8,15 @@
 
 #include <iostream>
 
-// Abstract List class
+// Doubly LinkedList class
 template <class T>
-class List {
+class DoubleLinkedList {
 public:
-	List (void);
-	~List (void);
+	DoubleLinkedList (void);
+	~DoubleLinkedList (void);
 	virtual void print (void);
-
 	virtual void push (T data);
+	virtual bool contains(T element);
 
 	// Getters
 	virtual long unsigned getLength (void) const {return length;};
@@ -32,7 +32,7 @@ protected:
 
 // Constructor, initialise fields
 template <class T>
-List<T>::List (void)
+DoubleLinkedList<T>::DoubleLinkedList (void)
 {
 	length = 0;
 	head = nullptr;
@@ -41,7 +41,7 @@ List<T>::List (void)
 
 // Destructor, destroy nodes
 template <class T>
-List<T>::~List (void)
+DoubleLinkedList<T>::~DoubleLinkedList (void)
 {
 	Node *n = head, *tn;
 	while ((tn = n) != nullptr) {
@@ -52,7 +52,7 @@ List<T>::~List (void)
 
 // Print list
 template <class T>
-void List<T>::print (void)
+void DoubleLinkedList<T>::print (void)
 {
 	Node *n = head;
 	while (n != nullptr) {
@@ -63,7 +63,7 @@ void List<T>::print (void)
 
 // Push the tail
 template <class T>
-void List<T>::push (T data)
+void DoubleLinkedList<T>::push (T data)
 {
 	// Create a new node and set it's fields
 	Node *newNode = new Node;
@@ -81,9 +81,23 @@ void List<T>::push (T data)
 	}
 }
 
+// Check if the list contains an element
+template<class T>
+inline bool DoubleLinkedList<T>::contains(T element)
+{
+	Node* node = head;
+	while (node != nullptr) {
+		if (node->data == element) {
+			return true;
+		}
+		node = node->next;
+	}
+	return false;
+}
+
 // Stack derived class
 template <class T>
-class Stack : public List<T> {
+class Stack : public DoubleLinkedList<T> {
 public:
 	T pop (void);
 };
@@ -93,19 +107,19 @@ template <class T>
 T Stack<T>::pop (void)
 {
 	// Save the value of temp for return later
-	T t = List<T>::tail->data;
+	T t = DoubleLinkedList<T>::tail->data;
 
 	// Save the memory location of the old tail
-	typename List<T>::Node *tn = List<T>::tail;
+	typename DoubleLinkedList<T>::Node *tn = DoubleLinkedList<T>::tail;
 
 	// Set the tail to the previous node and it's next to null
-	List<T>::tail = List<T>::tail->previous;
-	List<T>::tail->next = nullptr;
+	DoubleLinkedList<T>::tail = DoubleLinkedList<T>::tail->previous;
+	DoubleLinkedList<T>::tail->next = nullptr;
 
 	// Delete the old tail
 	delete tn;
 
-	--List<T>::length;
+	--DoubleLinkedList<T>::length;
 
 	// Return the old data value
 	return t;
@@ -113,7 +127,7 @@ T Stack<T>::pop (void)
 
 // Queue derived class
 template <class T>
-class Queue : public List<T> {
+class Queue : public DoubleLinkedList<T> {
 public:
 	T pop (void);
 	void append(Queue<T>*);
@@ -134,19 +148,19 @@ template <class T>
 T Queue<T>::pop (void)
 {
 	// Save the value of temp for return later
-	T t = List<T>::head->data;
+	T t = DoubleLinkedList<T>::head->data;
 
 	// Save the memory location of the old head
-	typename List<T>::Node *tn = List<T>::head;
+	typename DoubleLinkedList<T>::Node *tn = DoubleLinkedList<T>::head;
 
 	// Set the head to the next node and it's previos to null
-	List<T>::head = List<T>::head->next;
-	List<T>::head->previous = nullptr;
+	DoubleLinkedList<T>::head = DoubleLinkedList<T>::head->next;
+	DoubleLinkedList<T>::head->previous = nullptr;
 
 	// Delete the old tail
 	delete tn;
 
-	--List<T>::length;
+	--DoubleLinkedList<T>::length;
 
 	// Return the old data value
 	return t;

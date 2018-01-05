@@ -10,7 +10,7 @@
 #include <fstream>
 
 #include "../RPN/postfix.hpp"
-#include "../RPN/list.hpp"
+#include "../Data Structures/data_structures.hpp"
 
 class Preprocessor {
 private:
