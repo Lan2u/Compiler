@@ -87,14 +87,14 @@ BOOST_AUTO_TEST_CASE(List_Create_Test) {
 BOOST_AUTO_TEST_CASE(List_Push_Test) {
 	DoubleLinkedList<int> l;
 	int a = 10;
-	l.push(a);
+	l.add(a);
 	BOOST_TEST(l.getLength() == 1);
 }
 
 BOOST_AUTO_TEST_CASE(List_Push_One_Contains_Test) {
 	DoubleLinkedList<int> l;
 	int a = 10;
-	l.push(a);
+	l.add(a);
 	BOOST_TEST(l.contains(a));
 }
 
@@ -103,7 +103,7 @@ BOOST_AUTO_TEST_CASE(List_Push_One_No_Contains_Test) {
 	int a = 10;
 	int b = 0;
 
-	l.push(a);
+	l.add(a);
 	BOOST_TEST(l.contains(b) == false);
 }
 

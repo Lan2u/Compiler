@@ -155,5 +155,5 @@ int StateContainer::getLength()
 /* Add the given state to the state container. Makes no check for duplicate */
 void StateContainer::add(State * state)
 {
-	push(state);
+	DoubleLinkedList::add(state);
 }

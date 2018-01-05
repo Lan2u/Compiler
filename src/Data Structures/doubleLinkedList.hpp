@@ -1,10 +1,8 @@
 #ifndef LIST_HPP
 #define LIST_HPP
-// list.hpp
 // Eva Lott, Paul Lancaster
 // Created	28/12/17
-// Edited	29/12/17
-// Contains an abstract linked list class and derived classes for stack and queue data structures.
+// Contains an DoublyLinkedList
 
 #include <iostream>
 
@@ -15,9 +13,9 @@ public:
 	DoubleLinkedList (void);
 	~DoubleLinkedList (void);
 	virtual void print (void);
-	virtual void push (T data);
+	virtual void add (T data);
 	virtual bool contains(T element);
-
+	
 	// Getters
 	virtual long unsigned getLength (void) const {return length;};
 
@@ -63,7 +61,7 @@ void DoubleLinkedList<T>::print (void)
 
 // Push the tail
 template <class T>
-void DoubleLinkedList<T>::push (T data)
+void DoubleLinkedList<T>::add (T data)
 {
 	// Create a new node and set it's fields
 	Node *newNode = new Node;

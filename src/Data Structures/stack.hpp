@@ -1,6 +1,6 @@
 #ifndef STACK
 #define STACK
-#include "doubleLinkedList"
+#include "doubleLinkedList.hpp"
 
 // Stack derived class
 template <class T>

@@ -31,7 +31,7 @@ void Queue<T>::append(Queue<T>* queue) {
 // Enqueue an element to the queue.
 template <class T>
 void Queue<T>::enqueue(T element) {
-	push(element);
+	add(element);
 }
 
 // Pop the value of the head then destroy it
