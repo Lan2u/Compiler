@@ -125,12 +125,20 @@ State * State::getNext(char input)
 Instansiate a new StateContainer.
 */
 StateContainer::StateContainer(void) {
-
+	length = 0;
+	head = nullptr;
+	tail = nullptr;
 }
 
 /* Finds the given state in the list */
-State * StateContainer::findStateById(std::string) {
-	return nullptr;
+State * StateContainer::findStateById(std::string id) {
+	Node* node = head;
+	while (node != nullptr) {
+		if (node->data->getId() == id) {
+			return node->data;
+		}
+		node = node->next;
+	}
 }
 
 std::vector<State*> StateContainer::findStatesById(std::string, std::string)
@@ -141,9 +149,11 @@ std::vector<State*> StateContainer::findStatesById(std::string, std::string)
 
 int StateContainer::getLength()
 {
-	return 0;
+	return length;
 }
 
-void StateContainer::add(State *)
+/* Add the given state to the state container. Makes no check for duplicate */
+void StateContainer::add(State * state)
 {
+	push(state);
 }

@@ -22,7 +22,8 @@ private:
 	std::unordered_map<char, State*> transitions;
 	std::string stateId;
 	Token* acceptingTokenType;
-public: 
+public:
+	std::string getId() { return stateId; };
 	State(std::string id);
 	void addTransition(char, State*);
 	State* getNext(char);
