@@ -1,7 +1,7 @@
 #ifndef QUEUE
 #define QUEUE
 
-#include "data_structures.hpp"
+#include "doubleLinkedList.hpp"
 
 // Queue derived class
 template <class T>
