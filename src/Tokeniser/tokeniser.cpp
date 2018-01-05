@@ -2,13 +2,6 @@
 
 #define FSA_DEF_DELIMITER ","
 
-// Find the state with the given id in the list of states and return a pointer to it or a nullptr if not found
-State* Tokeniser::findState(std::string id) {
-	
-	// TODO implement
-	return nullptr;
-}
-
 // Get the token that is represented by the given token type string. Eg. OPERATOR would give a token of OPERATOR type. 
 // Initially this is statically hard coded however it should probably be stored in a file
 Token* Tokeniser::getAcceptingTokenType(std::string tokenTypeStr) {
@@ -46,16 +39,16 @@ void Tokeniser::addTransition(std::string transitionStr)
 	// TODO handle there not being 4 pieces of the definition
 	strStream >> acceptingTokenTypeStr;
 
-	State* initialState = findState(initialStateId);
+	State* initialState = states.findStateById(initialStateId);
 	if (initialState == nullptr) {
 		initialState = new State(initialStateId);
-		states.push(initialState);
+		states.add(initialState);
 	}
 
-	State* finalState = findState(finalStateId);
+	State* finalState = states.findStateById(finalStateId);
 	if (finalState == nullptr) {
 		finalState = new State(finalStateId);
-		states.push(finalState);
+		states.add(finalState);
 	}
 
 
@@ -126,4 +119,31 @@ State * State::getNext(char input)
 	else {
 		return next;
 	}
+}
+
+/*
+Instansiate a new StateContainer.
+*/
+StateContainer::StateContainer(void) {
+
+}
+
+/* Finds the given state in the list */
+State * StateContainer::findStateById(std::string) {
+	return nullptr;
+}
+
+std::vector<State*> StateContainer::findStatesById(std::string, std::string)
+{
+	std::vector<State*> result = {};
+	return result;
+}
+
+int StateContainer::getLength()
+{
+	return 0;
+}
+
+void StateContainer::add(State *)
+{
 }

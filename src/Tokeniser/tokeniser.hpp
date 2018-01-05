@@ -13,6 +13,7 @@
 #include <sstream>
 #include "token.hpp"
 #include "../Data Structures/data_structures.hpp"
+#include <vector>
 
 // Representation of a state within the nFSA. 
 class State {
@@ -30,6 +31,22 @@ public:
 	Token* getInstanceOfToken(); // TODO. Should return a new instance of the token that is recognised by reaching this state.
 };
 
+/* Container for the states. This relys on the objects being pointers to states. Bad things happen if they aren't.
+Abstracted out so can be modified as needed to improve performance later.
+Currently backed by a doubly linked list.
+*/
+class StateContainer : private DoubleLinkedList<State*> {
+public:
+	StateContainer(void);
+	/*Find the state within the state container that has the given id or return a nullptr*/
+	State* findStateById(std::string);
+	/* Find 2 states by the id within the state container. 
+	Has at worst n time complexity rather than 2n for doing a findStateById() call twice. */
+	std::vector<State*> findStatesById(std::string, std::string);
+	int getLength();
+	void add(State*);
+};
+
 /*
 An nFSA based tokeniser.
 *
@@ -41,10 +58,9 @@ private:
 
 	/* A list of all the states in the fsa in the tokeniser. This information could be got by doing a state traversal however that
 	is an O(n) operation which is very slow if this needs to be done for each new state as this would cause O(n^2) complexity. */
-	DoubleLinkedList<State*> states;
+	StateContainer states;
 
-	/* Finds the given state in the list */
-	State * Tokeniser::findState(std::string);
+	
 	Token * getAcceptingTokenType(std::string);
 public:
 	Tokeniser(std::string fsaDefinitionFilePath);
@@ -52,13 +68,6 @@ public:
 	void addTransition(std::string);
 	Token* tokeniseString(std::string);
 	void reset();
-};
-
-// Container for the states. Abstracted out so can be modified as needed to improve performance later. 
-// // Currently backed by a doubly linked list.
-template <class T>
-class StateContainer : public DoubleLinkedList<T>{ 
-	
 };
 
 #endif // TOKENISER_HPP
