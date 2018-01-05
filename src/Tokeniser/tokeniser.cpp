@@ -1,5 +1,7 @@
 #include "tokeniser.hpp"
 
+// Paul Lancaster
+
 #define FSA_DEF_DELIMITER ","
 
 // Get the token that is represented by the given token type string. Eg. OPERATOR would give a token of OPERATOR type. 

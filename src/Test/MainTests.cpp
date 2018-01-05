@@ -8,7 +8,7 @@
 #include "../Tokeniser/tokeniser.hpp"
 #include <string>
 
-BOOST_AUTO_TEST_CASE(test_to_make_sure_tests_work) {
+BOOST_AUTO_TEST_CASE(Test_to_make_sure_tests_work) {
 	int i = 1 + 1;
 	BOOST_TEST(i == 2);
 	//BOOST_TEST(i == 1);
@@ -84,21 +84,21 @@ BOOST_AUTO_TEST_CASE(List_Create_Test) {
 	BOOST_TEST(l.getLength() == 0);
 }
 
-BOOST_AUTO_TEST_CASE(List_Push_Test) {
+BOOST_AUTO_TEST_CASE(List_Add_Test) {
 	DoubleLinkedList<int> l;
 	int a = 10;
 	l.add(a);
 	BOOST_TEST(l.getLength() == 1);
 }
 
-BOOST_AUTO_TEST_CASE(List_Push_One_Contains_Test) {
+BOOST_AUTO_TEST_CASE(List_Add_One_Contains_Test) {
 	DoubleLinkedList<int> l;
 	int a = 10;
 	l.add(a);
 	BOOST_TEST(l.contains(a));
 }
 
-BOOST_AUTO_TEST_CASE(List_Push_One_No_Contains_Test) {
+BOOST_AUTO_TEST_CASE(List_Add_One_No_Contains_Test) {
 	DoubleLinkedList<int> l;
 	int a = 10;
 	int b = 0;
@@ -112,6 +112,33 @@ BOOST_AUTO_TEST_CASE(List_Empty_Contains_Test) {
 	int b = 0;
 
 	BOOST_TEST(l.contains(b) == false);
+}
+
+BOOST_AUTO_TEST_CASE(List_Add_One_Remove_One_Test) {
+	DoubleLinkedList<int> l;
+	int a = 10;
+	l.add(a);
+	l.remove(a);
+	BOOST_TEST(l.getLength() == 0);
+}
+
+BOOST_AUTO_TEST_CASE(List_Add_Two_Remove_One_Test) {
+	DoubleLinkedList<int> l;
+	int a = 10;
+	int b = 5;
+	l.add(a);
+	l.add(b);
+	l.remove(a);
+	BOOST_TEST(l.getLength() == 1);
+}
+
+BOOST_AUTO_TEST_CASE(List_Add_One_Remove_One_Not_Present_Test) {
+	DoubleLinkedList<int> l;
+	int a = 10;
+	int b = 5;
+	l.add(a);
+	// TODO handle exceptions in test cases
+	l.remove(b);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
@@ -133,14 +160,14 @@ BOOST_AUTO_TEST_CASE(Queue_Create_Test) {
 	BOOST_TEST(q.getLength() == 0);
 }
 
-BOOST_AUTO_TEST_CASE(Queue_Add_One_Test) {
+BOOST_AUTO_TEST_CASE(Queue_Enqueue_One_Test) {
 	Queue<int> q;
 	int a = 2;
 	q.enqueue(a);
 	BOOST_TEST(q.getLength() == 1);
 }
 
-BOOST_AUTO_TEST_CASE(Queue_Add_One_Remove_One_Test) {
+BOOST_AUTO_TEST_CASE(Queue_Enqueue_One_Dequeue_One_Test) {
 	Queue<int> q;
 	int a = 2;
 	q.enqueue(a);
@@ -149,7 +176,7 @@ BOOST_AUTO_TEST_CASE(Queue_Add_One_Remove_One_Test) {
 	BOOST_TEST(q.getLength() == 0);
 }
 
-BOOST_AUTO_TEST_CASE(Queue_Add_Three_Remove_All_Test) {
+BOOST_AUTO_TEST_CASE(Queue_Enqueue_Three_Dequeue_All_Test) {
 	Queue<int> q;
 	int a = 2;
 	int b = 3;

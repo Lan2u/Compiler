@@ -14,6 +14,7 @@ public:
 	~DoubleLinkedList (void);
 	virtual void print (void);
 	virtual void add (T data);
+	virtual void remove(T element);
 	virtual bool contains(T element);
 	
 	// Getters
@@ -77,6 +78,36 @@ void DoubleLinkedList<T>::add (T data)
 		tail->next = newNode;
 		tail = newNode;
 	}
+}
+
+template<class T>
+inline void DoubleLinkedList<T>::remove(T element)
+{
+	Node* node = head;
+	while (node != nullptr) {
+		if (node->data == element) {
+			if (node == head) {
+				delete node;
+				head = nullptr;
+				tail = nullptr;
+				length = 0;
+			}
+			if (node == tail) {
+				node->previous->next = nullptr;
+				delete node;
+				length--;
+			}
+
+			node->previous->next = node->next;
+			node->next->previous = node->previous;
+			delete node;
+			length--;
+		}
+		else {
+			node = node->next;
+		}
+	}
+	// TODO. Throw an exception to indicate that the element wasn't found.
 }
 
 // Check if the list contains an element
