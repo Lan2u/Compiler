@@ -20,7 +20,6 @@ Tokeniser::Tokeniser(std::string fsaDefinitionFilePath){
 		addTransition(definitionLine);
 	}
 
-	initialState->addTransition(input.at(0), finalState);
 }
 
 void Tokeniser::addTransition(std::string transitionStr)

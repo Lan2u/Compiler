@@ -136,15 +136,15 @@ BOOST_AUTO_TEST_CASE(Queue_Create_Test) {
 BOOST_AUTO_TEST_CASE(Queue_Add_One_Test) {
 	Queue<int> q;
 	int a = 2;
-	q.push(a);
+	q.enqueue(a);
 	BOOST_TEST(q.getLength() == 1);
 }
 
 BOOST_AUTO_TEST_CASE(Queue_Add_One_Remove_One_Test) {
 	Queue<int> q;
 	int a = 2;
-	q.push(a);
-	int b = q.pop();
+	q.enqueue(a);
+	int b = q.dequeue();
 	BOOST_TEST(a == b);
 	BOOST_TEST(q.getLength() == 0);
 }
@@ -154,15 +154,15 @@ BOOST_AUTO_TEST_CASE(Queue_Add_Three_Remove_All_Test) {
 	int a = 2;
 	int b = 3;
 	int c = 4;
-	q.push(a);
-	q.push(b);
-	q.push(c);
+	q.enqueue(a);
+	q.enqueue(b);
+	q.enqueue(c);
 
 	BOOST_TEST(q.getLength() == 3);
 
-	BOOST_TEST(a == q.pop());
-	BOOST_TEST(b == q.pop());
-	BOOST_TEST(c == q.pop());
+	BOOST_TEST(a == q.dequeue());
+	BOOST_TEST(b == q.dequeue());
+	BOOST_TEST(c == q.dequeue());
 
 	BOOST_TEST(q.getLength() == 0);
 }
@@ -178,24 +178,24 @@ BOOST_AUTO_TEST_CASE(Queue_Append_Test) {
 	int e = 5;
 	int f = 6;
 
-	queue1.push(a);
-	queue1.push(b);
-	queue1.push(c);
+	queue1.enqueue(a);
+	queue1.enqueue(b);
+	queue1.enqueue(c);
 
-	queue2.push(d);
-	queue2.push(e);
-	queue2.push(f);
+	queue2.enqueue(d);
+	queue2.enqueue(e);
+	queue2.enqueue(f);
 
 	queue1.append(&queue2);
 
 	BOOST_TEST(queue1.getLength() == 6);
 
-	BOOST_TEST(a == queue1.pop());
-	BOOST_TEST(b == queue1.pop());
-	BOOST_TEST(c == queue1.pop());
-	BOOST_TEST(d == queue1.pop());
-	BOOST_TEST(e == queue1.pop());
-	BOOST_TEST(f == queue1.pop());
+	BOOST_TEST(a == queue1.dequeue());
+	BOOST_TEST(b == queue1.dequeue());
+	BOOST_TEST(c == queue1.dequeue());
+	BOOST_TEST(d == queue1.dequeue());
+	BOOST_TEST(e == queue1.dequeue());
+	BOOST_TEST(f == queue1.dequeue());
 }
 
 BOOST_AUTO_TEST_SUITE_END()

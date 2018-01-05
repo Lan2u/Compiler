@@ -19,7 +19,7 @@ Queue<string>* getFileContents (string filename)
 	// Loop through words
 	while (file >> str)
     {
-		queue->push(str);
+		queue->enqueue(str);
     }
 	
 	file.close();

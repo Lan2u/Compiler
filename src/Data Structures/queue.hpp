@@ -5,11 +5,18 @@
 
 // Queue derived class
 template <class T>
-class Queue : public DoubleLinkedList<T> {
+class Queue : private DoubleLinkedList<T> {
 public:
-	T pop(void);
+	T dequeue(void);
+	void enqueue(T);
 	void append(Queue<T>*);
+	int getLength();
 };
+
+template <class T>
+int Queue<T>::getLength() {
+	return length;
+}
 
 // O(1) time complexity appending of the given queue to the end of this queue
 // Does not update the pos because that would be an O(k) operation where k is
@@ -21,9 +28,15 @@ void Queue<T>::append(Queue<T>* queue) {
 	length = length + queue->getLength();
 }
 
+// Enqueue an element to the queue.
+template <class T>
+void Queue<T>::enqueue(T element) {
+	push(element);
+}
+
 // Pop the value of the head then destroy it
 template <class T>
-T Queue<T>::pop(void)
+T Queue<T>::dequeue(void)
 {
 	// Save the value of temp for return later
 	T t = DoubleLinkedList<T>::head->data;
