@@ -12,21 +12,23 @@ class DoubleLinkedList {
 public:
 	DoubleLinkedList (void);
 	~DoubleLinkedList (void);
-	virtual void print (void);
-	virtual void add (T data);
-	virtual void remove(T element);
-	virtual bool contains(T element);
-	
-	// Getters
-	virtual long unsigned getLength (void) const {return length;};
 
 protected:
 	long unsigned length;
+
 	struct Node {
 		T data;
 		long unsigned pos;
 		Node *next, *previous;
 	} *head, *tail;
+
+	virtual void print (void);
+	virtual void add (T data);
+	virtual void remove (T element);
+	virtual bool contains (T element);
+
+	// Getters
+	virtual long unsigned getLength (void) const {return length;};
 };
 
 // Constructor, initialise fields
@@ -81,7 +83,7 @@ void DoubleLinkedList<T>::add (T data)
 }
 
 template<class T>
-inline void DoubleLinkedList<T>::remove(T element)
+void DoubleLinkedList<T>::remove (T element)
 {
 	Node* node = head;
 	while (node != nullptr) {
@@ -107,12 +109,11 @@ inline void DoubleLinkedList<T>::remove(T element)
 			node = node->next;
 		}
 	}
-	// TODO. Throw an exception to indicate that the element wasn't found.
 }
 
 // Check if the list contains an element
 template<class T>
-inline bool DoubleLinkedList<T>::contains(T element)
+bool DoubleLinkedList<T>::contains (T element)
 {
 	Node* node = head;
 	while (node != nullptr) {

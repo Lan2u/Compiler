@@ -1,8 +1,5 @@
 #ifndef QUEUE_HPP
 #define QUEUE_HPP
-// queue.hpp
-// Paul Lancaster and Eva Lott
-// queue C++ implementation
 
 #include "doubleLinkedList.hpp"
 

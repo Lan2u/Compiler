@@ -1,5 +1,9 @@
-#ifndef STACK
-#define STACK
+#ifndef STACK_HPP
+#define STACK_HPP
+// stack.hpp
+// Paul Lancaster and Eva Lott
+// stack C++ implementation
+
 #include "doubleLinkedList.hpp"
 
 // Stack derived class
@@ -11,7 +15,7 @@ public:
 
 // Pop the value of the tail then destroy it
 template <class T>
-T Stack<T>::pop(void)
+T Stack<T>::pop (void)
 {
 	// Save the value of temp for return later
 	T t = DoubleLinkedList<T>::tail->data;
@@ -31,4 +35,4 @@ T Stack<T>::pop(void)
 	// Return the old data value
 	return t;
 }
-#endif
+#endif // STACK_HPP
