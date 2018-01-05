@@ -7,12 +7,12 @@
 
 #include <string>
 #include <unordered_map>
-#include "../Data Structures/doubleLinkedList.hpp"
+#include "../DataStructures/doubleLinkedList.hpp"
 #include <fstream>
 #include <iostream>
 #include <sstream>
 #include "token.hpp"
-#include "../Data Structures/queue.hpp"
+#include "../DataStructures/queue.hpp"
 #include <vector>
 #include <exception>
 

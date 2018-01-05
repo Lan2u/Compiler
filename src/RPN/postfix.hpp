@@ -7,7 +7,7 @@
 // Responisble for conversion of string infix sequences into postfix and solving postfix (rpn) expressions. The precendence of operators is as follows...
 // Brackets>Powers>Order>Division>Multiplication>Addition>Subtraction
 
-#include "../Data Structures/queue.hpp"
+#include "../DataStructures/queue.hpp"
 #include "../Tokeniser/token.hpp"
 
 #include <string>

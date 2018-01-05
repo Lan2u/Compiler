@@ -3,8 +3,8 @@
 #define BOOST_TEST_MODULE Main Tests
 #include <boost/test/included/unit_test.hpp>
 
-#include "../Data Structures/doubleLinkedList.hpp"
-#include "../Data Structures/queue.hpp"
+#include "../DataStructures/doubleLinkedList.hpp"
+#include "../DataStructures/queue.hpp"
 #include "../Tokeniser/tokeniser.hpp"
 #include <string>
 

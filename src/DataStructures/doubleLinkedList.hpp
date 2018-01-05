@@ -12,6 +12,12 @@ class DoubleLinkedList {
 public:
 	DoubleLinkedList (void);
 	~DoubleLinkedList (void);
+	virtual void add(T data);
+	virtual void remove(T element);
+	virtual bool contains(T element);
+
+	// Getters
+	virtual long unsigned getLength(void) const { return length; };
 
 protected:
 	long unsigned length;
@@ -23,12 +29,6 @@ protected:
 	} *head, *tail;
 
 	virtual void print (void);
-	virtual void add (T data);
-	virtual void remove (T element);
-	virtual bool contains (T element);
-
-	// Getters
-	virtual long unsigned getLength (void) const {return length;};
 };
 
 // Constructor, initialise fields
