@@ -151,11 +151,11 @@ BOOST_AUTO_TEST_CASE(Tokeniser_Tokenise_Int_Test) {
 
 }
 
-BOOST_AUTO_TEST_CASE(Tokeniser_Add_) {
-	Tokeniser t;
-	std::string str = ""; // TODO write a demo state transition.
-	t.addTransition(str);
-
+BOOST_AUTO_TEST_CASE(Tokeniser_Add_Transition_Test) {
+	Tokeniser tokeniser;
+	std::string str = "A,(,B,OPEN_BRACKET";
+	tokeniser.addTransition(str);
+	BOOST_TEST(tokeniser.getNumberOfStates() == 2);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

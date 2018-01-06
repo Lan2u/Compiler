@@ -1,4 +1,6 @@
 #include "tokeniser.hpp"
+#include <boost/algorithm/string/split.hpp>
+#include <boost/algorithm/string.hpp>
 
 // Paul Lancaster
 
@@ -24,22 +26,7 @@ Tokeniser::Tokeniser(std::string fsaDefinitionFilePath){
 
 }
 
-void Tokeniser::addTransition(std::string transitionStr)
-{
-	// Parse the state
-	std::stringstream strStream(transitionStr);
-
-	std::string initialStateId;
-	std::string input; // Should be singular character
-	std::string finalStateId;
-	std::string acceptingTokenTypeStr;
-
-	strStream >> initialStateId;
-	strStream >> input;
-	strStream >> finalStateId;
-
-	// TODO handle there not being 4 pieces of the definition
-	strStream >> acceptingTokenTypeStr;
+void Tokeniser::addTransition(std::string initialStateId, std::string input, std::string finalStateId, std::string acceptingTokenTypeStr) {
 
 	State* initialState = states.findStateById(initialStateId);
 	if (initialState == nullptr) {
@@ -53,13 +40,29 @@ void Tokeniser::addTransition(std::string transitionStr)
 		states.add(finalState);
 	}
 
-
 	if (acceptingTokenTypeStr != "") {
 		Token* tokenType = getAcceptingTokenType(acceptingTokenTypeStr);
 		finalState->setAccepting(tokenType);
 	}
 
 	initialState->addTransition(input.at(0), finalState);
+}
+
+void Tokeniser::addTransition(std::string transitionStr)
+{
+	std::vector<std::string> splitVec;
+	boost::split(splitVec, transitionStr, boost::is_any_of(FSA_DEF_DELIMITER));
+	int capacity = splitVec.capacity();
+
+	if (capacity == 3) {
+		addTransition(splitVec.at(0), splitVec.at(1), splitVec.at(2), "");
+	}
+	else if (capacity == 4) {
+		addTransition(splitVec.at(0), splitVec.at(1), splitVec.at(2), splitVec.at(3));
+	}
+	else {
+		// TODO malformed FSA def handeling.
+	}
 }
 
 // Tokenises the given string and returns the tokenised result.
@@ -83,6 +86,11 @@ Token* Tokeniser::tokeniseString(std::string str)
 
 Tokeniser::Tokeniser(void) {
 	reset();
+}
+
+unsigned Tokeniser::getNumberOfStates()
+{
+	return states.getLength();
 }
 
 void Tokeniser::setInitialState(std::string stateId){

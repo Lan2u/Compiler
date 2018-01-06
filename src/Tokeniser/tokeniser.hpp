@@ -73,8 +73,10 @@ public:
 	Tokeniser(std::string fsaDefinitionFilePath);
 	// Adds a transition to the tokeniser. Generates the states as needed.
 	void addTransition(std::string);
+	void Tokeniser::addTransition(std::string,std::string,std::string,std::string);
 	Token* tokeniseString(std::string);
 	// Sets the initial state. 
+	unsigned Tokeniser::getNumberOfStates();
 	void Tokeniser::setInitialState(std::string stateId);
 	void reset();
 };
