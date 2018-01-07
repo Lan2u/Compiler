@@ -13,22 +13,30 @@
 #include "../DataStructures/queue.hpp"
 #include <vector>
 #include <exception>
+#include <boost/algorithm/string/split.hpp>
+#include <boost/algorithm/string.hpp>
 
 // Representation of a state within the nFSA. 
 class State {
 private:
-	// Represents the state transition function of the FSA for this state
-	std::unordered_map<char, State*> transitions;
-	std::string stateId;
-	Token* acceptingTokenType;
+	std::unordered_map<char, State*> transitions; // Keeps tracks of which input (char) causes which next state.
+	std::string stateId; // The id of the state. Should be unique.
+	std::string acceptingTokenTypeStr; // The string that represents the token that this state represents if it was accepted as a token
 public:
-	std::string getId() { return stateId; };
+	// Constructor. The given id should be unique otherwise the behaviour of the whole program is undefined.
 	State(std::string id);
-	void addTransition(char, State*);
+
+	// Methods used for traversing the states once the FSA has been created/generated
 	State* getNext(char);
-	void setAccepting(Token*);
 	bool isAccepting();
-	Token* getInstanceOfToken(); // TODO. Should return a new instance of the token that is recognised by reaching this state.
+
+	// Methods used for building up the states when the FSA is created.
+	void addTransition(char, State*); 
+	void setAccepting(std::string);
+	
+	// Getters
+	std::string getAcceptingTokenTypeStr();
+	std::string getId() { return stateId; };
 };
 
 class State_Not_Found_Exception : public std::exception {
@@ -65,15 +73,16 @@ private:
 	/* A list of all the states in the fsa in the tokeniser. This information could be got by doing a state traversal however that
 	is an O(n) operation which is very slow if this needs to be done for each new state as this would cause O(n^2) complexity. */
 	StateContainer states;
-	Token * getAcceptingTokenType(std::string);
-
+	Token* Tokeniser::getAcceptingTokenType(std::string);
 public:
 	Tokeniser(void);
 	Tokeniser(std::string fsaDefinitionFilePath);
+
 	// Adds a transition to the tokeniser. Generates the states as needed.
 	void addTransition(std::string);
 	void addTransition(std::string,std::string,std::string,std::string);
 	Token* tokeniseString(std::string);
+
 	// Sets the initial state. 
 	unsigned getNumberOfStates();
 	void setInitialState(std::string stateId);

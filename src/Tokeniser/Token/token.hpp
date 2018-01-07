@@ -18,6 +18,7 @@ public:
 		OPERATOR, IDENTIFIER 
 	};
 
+	static Token* getRelevantToken(std::string);
 	virtual TokenType getType() = 0;
 	virtual std::string* getValue() = 0;
 };

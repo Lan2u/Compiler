@@ -1,4 +1,5 @@
 #include "operator.hpp"
+#include "operator.hpp"
 
 // Create an operator based on the inputted symbol
 Operator::Operator(char symbol)
@@ -6,48 +7,37 @@ Operator::Operator(char symbol)
 	// Assign precidence and type to the operator
 	switch (symbol) {
 	case '!':
-		type = Type::NEGATION;
-		precidence = Precidence::NEGATION;
+		Operator::Operator(Type::NEGATION);
 		break;
 	case '%':
-		type = Type::REMAINDER;
-		precidence = Precidence::REMAINDER;
+		Operator::Operator(Type::REMAINDER);
 		break;
 	case '&':
-		type = Type::AND;
-		precidence = Precidence::AND;
+		Operator::Operator(Type::AND);
 		break;
 	case '*':
-		type = Type::MULTIPLICATION;
-		precidence = Precidence::MULTIPLICATION;
+		Operator::Operator(Type::MULTIPLICATION);
 		break;
 	case '+':
-		type = Type::ADDITION;
-		precidence = Precidence::ADDITION;
+		Operator::Operator(Type::ADDITION);
 		break;
 	case '-':
-		type = Type::SUBTRACTION;
-		precidence = Precidence::SUBTRACTION;
+		Operator::Operator(Type::SUBTRACTION);
 		break;
 	case '/':
-		type = Type::DIVISION;
-		precidence = Precidence::DIVISION;
+		Operator::Operator(Type::DIVISION);
 		break;
 	case '<':
-		type = Type::COMPARISON;
-		precidence = Precidence::COMPARISON;
+		Operator::Operator(Type::COMPARISON);
 		break;
 	case '=':
-		type = Type::EQUALS;
-		precidence = Precidence::EQUALS;
+		Operator::Operator(Type::EQUALS);
 		break;
 	case '^':
-		type = Type::POWER;
-		precidence = Precidence::POWER;
+		Operator::Operator(Type::POWER);
 		break;
 	case '|':
-		type = Type::OR;
-		precidence = Precidence::OR;
+		Operator::Operator(Type::OR);
 		break;
 	default:
 		// An invalid operator has been used
@@ -55,14 +45,55 @@ Operator::Operator(char symbol)
 		exit(EXIT_FAILURE);
 		break;
 	}
+	value = &std::string(1, symbol);
 }
 
-TokenType Operator::getType()
+Operator::Operator(Type operatorType)
+{
+	type = operatorType;
+	switch (operatorType) {
+	case Type::NEGATION:
+		precidence = Precidence::NEGATION;
+		break;
+	case Type::REMAINDER:
+		precidence = Precidence::REMAINDER;
+		break;
+	case Type::AND:
+		precidence = Precidence::AND;
+		break;
+	case Type::MULTIPLICATION:
+		precidence = Precidence::MULTIPLICATION;
+		break;
+	case Type::ADDITION:
+		precidence = Precidence::ADDITION;
+		break;
+	case Type::SUBTRACTION:
+		precidence = Precidence::SUBTRACTION;
+		break;
+	case Type::DIVISION:
+		precidence = Precidence::DIVISION;
+		break;
+	case Type::COMPARISON:
+		precidence = Precidence::COMPARISON;
+		break;
+	case Type::EQUALS:
+		precidence = Precidence::EQUALS;
+		break;
+	case Type::POWER:
+		precidence = Precidence::POWER;
+		break;
+	case Type::OR:
+		precidence = Precidence::OR;
+		break;
+	}
+}
+
+Token::TokenType Operator::getType()
 {
 	return TokenType::OPERATOR;
 }
 
 std::string * Operator::getValue()
 {
-	return nullptr;
+	return value;
 }

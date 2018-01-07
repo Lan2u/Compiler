@@ -1,16 +1,11 @@
 #include "tokeniser.hpp"
-#include <boost/algorithm/string/split.hpp>
-#include <boost/algorithm/string.hpp>
-
 // Paul Lancaster
 
 #define FSA_DEF_DELIMITER ","
 
 // Get the token that is represented by the given token type string. Eg. OPERATOR would give a token of OPERATOR type. 
-// Initially this is statically hard coded however it should probably be stored in a file
 Token* Tokeniser::getAcceptingTokenType(std::string tokenTypeStr) {
-	// TODO
-	return nullptr;
+	return Token::getRelevantToken(tokenTypeStr);
 }
 
 Tokeniser::Tokeniser(std::string fsaDefinitionFilePath){	
@@ -27,7 +22,6 @@ Tokeniser::Tokeniser(std::string fsaDefinitionFilePath){
 }
 
 void Tokeniser::addTransition(std::string initialStateId, std::string input, std::string finalStateId, std::string acceptingTokenTypeStr) {
-
 	State* initialState = states.findStateById(initialStateId);
 	if (initialState == nullptr) {
 		initialState = new State(initialStateId);
@@ -41,8 +35,7 @@ void Tokeniser::addTransition(std::string initialStateId, std::string input, std
 	}
 
 	if (acceptingTokenTypeStr != "") {
-		Token* tokenType = getAcceptingTokenType(acceptingTokenTypeStr);
-		finalState->setAccepting(tokenType);
+		finalState->setAccepting(acceptingTokenTypeStr);
 	}
 
 	initialState->addTransition(input.at(0), finalState);
@@ -74,8 +67,7 @@ Token* Tokeniser::tokeniseString(std::string str)
 	}
 	
 	if (currentState->isAccepting()) {
-		// TODO
-		return nullptr;
+		return getAcceptingTokenType(currentState->getAcceptingTokenTypeStr());
 	}
 	else {
 		// TODO invalid token encountered
@@ -105,22 +97,21 @@ void Tokeniser::reset()
 State::State(std::string id)
 {
 	stateId = id; 
-	acceptingTokenType = nullptr;
+	acceptingTokenTypeStr = "";
 }
 
 // Return true if the state is an accepting state.
 bool State::isAccepting() {
-	return (acceptingTokenType != nullptr);
+	return (acceptingTokenTypeStr == "");
 }
 
-Token * State::getInstanceOfToken()
+std::string State::getAcceptingTokenTypeStr()
 {
-	return nullptr;
+	return std::string();
 }
 
-
-void State::setAccepting(Token* type) {
-	acceptingTokenType = type;
+void State::setAccepting(std::string acceptingTokenStr) {
+	acceptingTokenTypeStr = acceptingTokenStr;
 }
 
 void State::addTransition(char input, State * finalState)

@@ -10,6 +10,7 @@ public:
 	};
 
 	Operator(char);
+	Operator(Type);
 
 	// Getters valid to all tokens
 	TokenType getType();
