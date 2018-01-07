@@ -74,9 +74,8 @@ Token* Tokeniser::tokeniseString(std::string str)
 	}
 	
 	if (currentState->isAccepting()) {
-		Token* token = currentState->getInstanceOfToken();
-		token->setValue(str);
-		return token;
+		// TODO
+		return nullptr;
 	}
 	else {
 		// TODO invalid token encountered

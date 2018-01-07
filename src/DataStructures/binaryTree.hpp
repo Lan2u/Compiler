@@ -1,5 +1,5 @@
-#ifndef TREE_HPP
-#define TREE_HPP
+#ifndef BINARY_TREE_HPP
+#define BINARY_TREE_HPP
 
 #include "queue.hpp"
 #include "../Tokeniser/token.hpp"
@@ -60,4 +60,4 @@ bool add (T *element)
 	
 }
 
-#endif // TREE_HPP
+#endif // BINARY_TREE_HPP
