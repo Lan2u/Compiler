@@ -1,5 +1,5 @@
-#ifndef tokenStreamInterator
-#define tokenStreamInterator
+#ifndef TOKENSTREAMITERATOR_HPP
+#define TOKENSTREAMITERATOR_HPP
 #include "../Tokeniser/token.hpp"
 
 // TODO
@@ -10,7 +10,6 @@ public:
 	TokenStreamIterator(Token* stream);
 	unsigned getPos(); // Get the absolute position in the stream where 0 is the first token
 	void setPos(unsigned pos); // Set the absolute position in the stream.
-}
+};
 
-
-#endif
+#endif // TOKENSTREAMITERATOR_HPP

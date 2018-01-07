@@ -33,7 +33,7 @@ public:
 	Token* getInstanceOfToken(); // TODO. Should return a new instance of the token that is recognised by reaching this state.
 };
 
-class State_Not_Found_Exception : public _exception {
+class State_Not_Found_Exception : public std::exception {
 	virtual const char* what() const throw() {
 		return "The state wasn't found!";
 	}
@@ -68,16 +68,18 @@ private:
 	is an O(n) operation which is very slow if this needs to be done for each new state as this would cause O(n^2) complexity. */
 	StateContainer states;
 	Token * getAcceptingTokenType(std::string);
+
 public:
 	Tokeniser(void);
 	Tokeniser(std::string fsaDefinitionFilePath);
 	// Adds a transition to the tokeniser. Generates the states as needed.
 	void addTransition(std::string);
-	void Tokeniser::addTransition(std::string,std::string,std::string,std::string);
+	void addTransition(std::string,std::string,std::string,std::string);
 	Token* tokeniseString(std::string);
 	// Sets the initial state. 
-	unsigned Tokeniser::getNumberOfStates();
-	void Tokeniser::setInitialState(std::string stateId);
+	unsigned getNumberOfStates();
+	void setInitialState(std::string stateId);
 	void reset();
 };
+
 #endif // TOKENISER_HPP
