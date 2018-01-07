@@ -1,8 +1,6 @@
 #ifndef TOKENISER_HPP
 #define TOKENISER_HPP
 
-#define ACCEPTING_TOKEN "*"
-
 // Paul Lancaster
 
 #include <string>

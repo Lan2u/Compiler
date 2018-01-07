@@ -11,8 +11,12 @@ class Token {
 protected:
 	std::string *value;
 public:
+	enum class TokenType {
+		Operator, Identifier
+	};
+
+	virtual TokenType getTokenType() = 0;
 	virtual std::string* getValue() = 0;
-	void setValue(std::string val) { value = &val; }
 };
 
 class Operator : public Token{
