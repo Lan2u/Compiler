@@ -1,61 +1,68 @@
-// Eva Lott, Paul Lancaster
-// Created	29/12/17
-
-#include "token.hpp"
+#include "operator.hpp"
 
 // Create an operator based on the inputted symbol
-Operator::Operator (char symbol)
+Operator::Operator(char symbol)
 {
 	// Assign precidence and type to the operator
 	switch (symbol) {
 	case '!':
 		type = Type::NEGATION;
 		precidence = Precidence::NEGATION;
-	break;
+		break;
 	case '%':
 		type = Type::REMAINDER;
 		precidence = Precidence::REMAINDER;
-	break;
+		break;
 	case '&':
 		type = Type::AND;
 		precidence = Precidence::AND;
-	break;
+		break;
 	case '*':
 		type = Type::MULTIPLICATION;
 		precidence = Precidence::MULTIPLICATION;
-	break;
+		break;
 	case '+':
 		type = Type::ADDITION;
 		precidence = Precidence::ADDITION;
-	break;
+		break;
 	case '-':
 		type = Type::SUBTRACTION;
 		precidence = Precidence::SUBTRACTION;
-	break;
+		break;
 	case '/':
 		type = Type::DIVISION;
 		precidence = Precidence::DIVISION;
-	break;
+		break;
 	case '<':
 		type = Type::COMPARISON;
 		precidence = Precidence::COMPARISON;
-	break;
+		break;
 	case '=':
 		type = Type::EQUALS;
 		precidence = Precidence::EQUALS;
-	break;
+		break;
 	case '^':
 		type = Type::POWER;
 		precidence = Precidence::POWER;
-	break;
+		break;
 	case '|':
 		type = Type::OR;
 		precidence = Precidence::OR;
-	break;
+		break;
 	default:
 		// An invalid operator has been used
 		// TODO: Create an error system... If the user accidentally uses x instead of * we could possibly show them where?
-		exit (EXIT_FAILURE);
-	break;
+		exit(EXIT_FAILURE);
+		break;
 	}
+}
+
+TokenType Operator::getType()
+{
+	return TokenType::OPERATOR;
+}
+
+std::string * Operator::getValue()
+{
+	return nullptr;
 }

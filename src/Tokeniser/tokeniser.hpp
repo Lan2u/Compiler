@@ -9,7 +9,7 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
-#include "token.hpp"
+#include "Token/token.hpp"
 #include "../DataStructures/queue.hpp"
 #include <vector>
 #include <exception>

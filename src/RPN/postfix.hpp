@@ -8,7 +8,7 @@
 // Brackets>Powers>Order>Division>Multiplication>Addition>Subtraction
 
 #include "../DataStructures/queue.hpp"
-#include "../Tokeniser/token.hpp"
+#include "../Tokeniser/Token/operator.hpp"
 
 #include <string>
 
