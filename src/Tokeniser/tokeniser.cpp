@@ -4,8 +4,10 @@
 #define FSA_DEF_DELIMITER ","
 
 // Get the token that is represented by the given token type string. Eg. OPERATOR would give a token of OPERATOR type. 
-Token* Tokeniser::getAcceptingTokenType(std::string tokenTypeStr) {
-	return Token::getRelevantToken(tokenTypeStr);
+Token* Tokeniser::getAcceptingTokenType(std::string tokenTypeStr, std::string value) {
+	Token* token = Token::getRelevantToken(tokenTypeStr); // Get the token the corresponds to the token string
+	token->setValue(value);  // Attach the value to the token
+	return token;
 }
 
 Tokeniser::Tokeniser(std::string fsaDefinitionFilePath){	
@@ -67,7 +69,7 @@ Token* Tokeniser::tokeniseString(std::string str)
 	}
 	
 	if (currentState->isAccepting()) {
-		return getAcceptingTokenType(currentState->getAcceptingTokenTypeStr());
+		return getAcceptingTokenType(currentState->getAcceptingTokenTypeStr(), str);
 	}
 	else {
 		// TODO invalid token encountered

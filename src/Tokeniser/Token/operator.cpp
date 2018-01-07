@@ -45,7 +45,7 @@ Operator::Operator(char symbol)
 		exit(EXIT_FAILURE);
 		break;
 	}
-	value = &std::string(1, symbol);
+	value = std::string(1, symbol);
 }
 
 Operator::Operator(Type operatorType)
@@ -93,7 +93,7 @@ Token::TokenType Operator::getType()
 	return TokenType::OPERATOR;
 }
 
-std::string * Operator::getValue()
+std::string Operator::getValue()
 {
 	return value;
 }

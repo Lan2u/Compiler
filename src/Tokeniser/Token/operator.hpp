@@ -14,7 +14,7 @@ public:
 
 	// Getters valid to all tokens
 	TokenType getType();
-	std::string* getValue();
+	std::string getValue();
 
 	// Unique Getters to Operator
 	Type getOperatorType(void) const { return type; };

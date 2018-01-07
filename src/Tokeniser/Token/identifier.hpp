@@ -5,9 +5,10 @@
 // Represents an identifier such as the 'x' in 'int x = 0'
 class Identifier : public Token {
 public:
-	Identifier(std::string*);
+	Identifier() {};
+	Identifier(std::string);
 	TokenType getType();
-	std::string* getValue();
+	std::string getValue();
 };
 
 #endif // TOKEN_IDENTIFIER_HPP

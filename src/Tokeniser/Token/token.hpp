@@ -9,7 +9,7 @@
 
 class Token {
 protected:
-	std::string *value;
+	std::string value;
 public:
 	// Contains every possible unique token type. 
 	// Some types may have subtypes if you instansiate a class of that type.
@@ -18,9 +18,10 @@ public:
 		OPERATOR, IDENTIFIER 
 	};
 
+	void setValue(std::string);
 	static Token* getRelevantToken(std::string);
 	virtual TokenType getType() = 0;
-	virtual std::string* getValue() = 0;
+	virtual std::string getValue() = 0;
 };
 
 #endif // TOKEN_HPP
