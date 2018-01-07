@@ -78,8 +78,6 @@ BOOST_AUTO_TEST_CASE(StateContainer_Add_5_Find_State_Test) {
 
 BOOST_AUTO_TEST_SUITE_END()
  
-// If you want to leave list as abstract then these will fail most of the time as DoubleLinkedList is never meant to be initialised
- /*
 BOOST_AUTO_TEST_SUITE(ListTests)
 
 BOOST_AUTO_TEST_CASE(List_Create_Test) {
@@ -145,8 +143,6 @@ BOOST_AUTO_TEST_CASE(List_Add_One_Remove_One_Not_Present_Test) {
 }
 
 BOOST_AUTO_TEST_SUITE_END()
-*/
-
 
 BOOST_AUTO_TEST_SUITE(TokeniserTests)
 
