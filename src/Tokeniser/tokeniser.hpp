@@ -1,7 +1,7 @@
 #ifndef TOKENISER_HPP
 #define TOKENISER_HPP
 
-// Paul Lancaster
+// Paul Lancaster and Eva Lott
 
 #include <string>
 #include <unordered_map>
@@ -73,7 +73,7 @@ private:
 	/* A list of all the states in the fsa in the tokeniser. This information could be got by doing a state traversal however that
 	is an O(n) operation which is very slow if this needs to be done for each new state as this would cause O(n^2) complexity. */
 	StateContainer states;
-	Token* Tokeniser::getAcceptingTokenType(std::string, std::string);
+	Token* getAcceptingTokenType(std::string, std::string);
 public:
 	Tokeniser(void);
 	Tokeniser(std::string fsaDefinitionFilePath);

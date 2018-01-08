@@ -20,8 +20,9 @@ public:
 
 	void setValue(std::string);
 	static Token* getRelevantToken(std::string);
-	virtual TokenType getType() = 0;
-	virtual std::string getValue() = 0;
+	// Getters valid to all tokens
+	virtual TokenType getType (void) const { return TokenType::OPERATOR; }
+	virtual std::string getValue (void) const { return value; }
 };
 
 #endif // TOKEN_HPP

@@ -1,5 +1,5 @@
 #include "tokeniser.hpp"
-// Paul Lancaster
+// Paul Lancaster and Eva Lott 
 
 #define FSA_DEF_DELIMITER ","
 
@@ -136,15 +136,18 @@ State * State::getNext(char input)
 /*
 Instansiate a new StateContainer.
 */
-StateContainer::StateContainer(void) {
+/* NOTE : you don't need to do this. The base class constructor is already defined to do this
+ *
+StateContainer::StateContainer (void) {
 	length = 0;
 	head = nullptr;
 	tail = nullptr;
 }
+*/
 
 /* Finds the given state in the list */
 State * StateContainer::findStateById(std::string id) {
-	Node* node = head;
+	Node *node = head;
 	while (node != nullptr) {
 		if (node->data->getId() == id) {
 			return node->data;

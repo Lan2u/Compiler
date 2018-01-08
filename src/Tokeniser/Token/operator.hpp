@@ -12,13 +12,9 @@ public:
 	Operator(char);
 	Operator(Type);
 
-	// Getters valid to all tokens
-	TokenType getType();
-	std::string getValue();
-
 	// Unique Getters to Operator
-	Type getOperatorType(void) const { return type; };
-	int getPrecidence(void) const { return (int) precidence; };
+	Type getOperatorType(void) const { return type; }
+	int getPrecidence(void) const { return (int) precidence; }
 
 private:
 	// Constant struct to remember precidence
