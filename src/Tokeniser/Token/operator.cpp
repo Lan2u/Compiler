@@ -1,43 +1,42 @@
 #include "operator.hpp"
-#include "operator.hpp"
 
 // Create an operator based on the inputted symbol
-Operator::Operator(char symbol)
+Operator::Operator(char symbol) : Operator(type)
 {
 	// Assign precidence and type to the operator
 	switch (symbol) {
 	case '!':
-		Operator::Operator(Type::NEGATION);
+		type = Type::NEGATION;
 		break;
 	case '%':
-		Operator::Operator(Type::REMAINDER);
+		type = Type::REMAINDER;
 		break;
 	case '&':
-		Operator::Operator(Type::AND);
+		type = Type::AND;
 		break;
 	case '*':
-		Operator::Operator(Type::MULTIPLICATION);
+		type = Type::MULTIPLICATION;
 		break;
 	case '+':
-		Operator::Operator(Type::ADDITION);
+		type = Type::ADDITION;
 		break;
 	case '-':
-		Operator::Operator(Type::SUBTRACTION);
+		type = Type::SUBTRACTION;
 		break;
 	case '/':
-		Operator::Operator(Type::DIVISION);
+		type = Type::DIVISION;
 		break;
 	case '<':
-		Operator::Operator(Type::COMPARISON);
+		type = Type::COMPARISON;
 		break;
 	case '=':
-		Operator::Operator(Type::EQUALS);
+		type = Type::EQUALS;
 		break;
 	case '^':
-		Operator::Operator(Type::POWER);
+		type = Type::POWER;
 		break;
 	case '|':
-		Operator::Operator(Type::OR);
+		type = Type::OR;
 		break;
 	default:
 		// An invalid operator has been used
@@ -50,7 +49,10 @@ Operator::Operator(char symbol)
 
 Operator::Operator(Type operatorType)
 {
+	// If Operator (char) has been used then type will have already been set,
+	// if not then it is set here
 	type = operatorType;
+
 	switch (operatorType) {
 	case Type::NEGATION:
 		precidence = Precidence::NEGATION;
@@ -86,14 +88,4 @@ Operator::Operator(Type operatorType)
 		precidence = Precidence::OR;
 		break;
 	}
-}
-
-Token::TokenType Operator::getType()
-{
-	return TokenType::OPERATOR;
-}
-
-std::string Operator::getValue()
-{
-	return value;
 }

@@ -20,7 +20,7 @@ public:
 	// Getters
 	long long unsigned getLength(void) const { return length; };
 
-private:
+protected:
 	struct Node {
 		T data;
 		long long unsigned pos;
