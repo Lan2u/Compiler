@@ -2,7 +2,7 @@
 #define BINARY_TREE_HPP
 
 #include "queue.hpp"
-#include "../Tokeniser/token.hpp"
+#include "../Tokeniser/Token/token.hpp"
 
 template <class T>
 class BinaryTree {

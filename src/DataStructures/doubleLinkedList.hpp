@@ -1,5 +1,5 @@
-#ifndef LIST_HPP
-#define LIST_HPP
+#ifndef DOUBLELINKEDLIST_HPP
+#define DOUBLELINKEDLIST_HPP
 // Eva Lott, Paul Lancaster
 // Created	28/12/17
 // Contains an DoublyLinkedList
@@ -12,22 +12,22 @@ class DoubleLinkedList {
 public:
 	DoubleLinkedList (void);
 	~DoubleLinkedList (void);
-	virtual void add(T data);
-	virtual void remove(T element);
-	virtual bool contains(T element);
+	void print (void);
+	void add (T);
+	void remove (T);
+	bool contains (T);
 
 	// Getters
-	virtual long unsigned getLength(void) const { return length; };
+	long long unsigned getLength(void) const { return length; };
 
+private:
 	struct Node {
 		T data;
-		long unsigned pos;
+		long long unsigned pos;
 		Node *next, *previous;
 	} *head, *tail;
 
-protected:
-	long unsigned length;
-	virtual void print (void);
+	long long unsigned length;
 };
 
 // Constructor, initialise fields
@@ -124,4 +124,4 @@ bool DoubleLinkedList<T>::contains (T element)
 	return false;
 }
 
-#endif // LIST_HPP
+#endif // DOUBLELINKEDLIST_HPP
