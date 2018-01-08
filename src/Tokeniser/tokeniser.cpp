@@ -143,20 +143,44 @@ StateContainer::StateContainer(void) {
 }
 
 /* Finds the given state in the list */
+/* Throws a State_Not_Found_Exception if the state is not found */
 State * StateContainer::findStateById(std::string id) {
 	Node* node = head;
 	while (node != nullptr) {
-		if (node->data->getId() == id) {
-			return node->data;
+		if (node->state->getId() == id) {
+			return node->state;
 		}
 		node = node->next;
 	}
 	throw new State_Not_Found_Exception;
 }
 
-std::vector<State*> StateContainer::findStatesById(std::string, std::string)
+/* Finds the 2 states which have the given id's and returns them in a vector in order
+with the first element of the returned vector corresponding to the first id and visa versa.
+If one of the states is not found then it will be represented by a nullptr */
+std::vector<State*> StateContainer::findStatesById(std::string id1, std::string id2)
 {
-	throw new State_Not_Found_Exception; // TODO Implemenetation of this method
+	std::vector<State*> result;
+	
+	Node* node = head;
+
+	State* state1 = nullptr;
+	State* state2 = nullptr;
+
+	while (node != nullptr && (state1 == nullptr || state2 == nullptr)) {
+		if (node->state->getId() == id1) {
+			state1 = node->state;
+		}
+		else if (node->state->getId() == id2) {
+			state2 = node->state;
+		}
+		node = node->next;
+	}
+
+	result.push_back(state1);
+	result.push_back(state2);
+
+	return result;
 }
 
 int StateContainer::getLength()
@@ -167,5 +191,16 @@ int StateContainer::getLength()
 /* Add the given state to the state container. Makes no check for duplicate */
 void StateContainer::add(State * state)
 {
-	DoubleLinkedList::add(state);
+	Node node(state);
+	node.next = nullptr;
+
+	if (head == nullptr) {
+		head = &node;
+		tail = head;
+	}
+	else {
+		tail->next = &node;
+	}
+
+	length++;
 }

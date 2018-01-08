@@ -49,7 +49,20 @@ class State_Not_Found_Exception : public std::exception {
 Abstracted out so can be modified as needed to improve performance later.
 Currently backed by a doubly linked list.
 */
-class StateContainer : private DoubleLinkedList<State*> {
+class StateContainer{
+private:
+	unsigned length;
+	class Node{
+	public:
+		Node* next;
+		State* state;
+		Node(State* state) {
+			Node::state = state;
+		}
+	};
+	Node* head;
+	Node* tail;
+	DoubleLinkedList<State*> states;
 public:
 	StateContainer(void);
 	/*Find the state within the state container that has the given id or return a nullptr*/
@@ -62,8 +75,7 @@ public:
 };
 
 /*
-An nFSA based tokeniser.
-*
+* An nFSA based tokeniser.
 */
 class Tokeniser {
 private:
