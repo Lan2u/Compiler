@@ -6,6 +6,8 @@
 #include "../DataStructures/doubleLinkedList.hpp"
 #include "../DataStructures/queue.hpp"
 #include "../Tokeniser/tokeniser.hpp"
+#include "../Parser/parser.hpp"
+#include "../Tokeniser/Token/number.hpp"
 
 #include <string>
 
@@ -231,6 +233,27 @@ BOOST_AUTO_TEST_CASE(Queue_Append_Test) {
 	BOOST_TEST(d == queue1.dequeue());
 	BOOST_TEST(e == queue1.dequeue());
 	BOOST_TEST(f == queue1.dequeue());
+}
+
+BOOST_AUTO_TEST_SUITE_END()
+
+BOOST_AUTO_TEST_SUITE(RecogniserTests)
+
+BOOST_AUTO_TEST_CASE(Recognise_Number_Positive_Test) {
+	TokenStreamIterator* tokenStreamIterator = new TokenStreamIterator();
+	Token* number = new Number();
+	tokenStreamIterator->queueToken(number);
+
+	Recogniser recogniser;
+	BOOST_TEST(recogniser.recogniseNumber(tokenStreamIterator));
+	BOOST_TEST(tokenStreamIterator->getPos() == 1); // The token stream iterator should of been advanced 
+}
+
+BOOST_AUTO_TEST_CASE(Recognise_Number_Negative_Test) {
+	TokenStreamIterator* tokenStreamIterator = new TokenStreamIterator();
+
+	Recogniser recogniser;
+	BOOST_TEST(recogniser.recogniseNumber(tokenStreamIterator) == false);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

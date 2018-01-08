@@ -19,15 +19,14 @@ public:
 	// Getters
 	virtual long unsigned getLength(void) const { return length; };
 
-protected:
-	long unsigned length;
-
 	struct Node {
 		T data;
 		long unsigned pos;
 		Node *next, *previous;
 	} *head, *tail;
 
+protected:
+	long unsigned length;
 	virtual void print (void);
 };
 

@@ -1,17 +1,21 @@
-/*
+#ifndef PARSER_HPP
+#define PARSER_HPP
+
+#include "tokenStreamIterator.hpp"
+
 class Parser {
 public:
-	// Parses the given token stream and returns the produced parse tree. 
-	//BinaryTree<Token> parseTokenStream(Token* tokenStream); // TODO
+	
 };
 
 class Recogniser {
 public:
 	// Return true if the given terminal/non-terminal is recognised in the token stream and false 
 	// if not. The token stream is reset to the starting position if not recognised.
-	bool recogniseDeclaration(Token* tokenStream);
-	bool recogniseNumber(Token* tokenStream);
-	bool recogniseOperator(Token* tokenStream);
-
+	bool recogniseProgram(TokenStreamIterator* tokenStream);
+	bool recogniseDeclaration(TokenStreamIterator* tokenStream);
+	bool recogniseNumber(TokenStreamIterator* tokenStream);
+	bool recogniseOperator(TokenStreamIterator* tokenStream);
 };
-*/
+
+#endif // PARSER_HPP
