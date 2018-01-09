@@ -51,17 +51,14 @@ Currently backed by a doubly linked list.
 */
 class StateContainer{
 private:
-	unsigned length;
-	class Node{
-	public:
-		Node* next;
-		State* state;
-		Node(State* state) {
-			Node::state = state;
+	long long unsigned length;
+	struct Node {
+		Node *next;
+		State *state;
+		Node (State *state) {
+			this->state = state;
 		}
-	};
-	Node* head;
-	Node* tail;
+	} *head, *tail;
 	DoubleLinkedList<State*> states;
 public:
 	StateContainer(void);
@@ -70,7 +67,7 @@ public:
 	/* Find 2 states by the id within the state container. 
 	Has at worst n time complexity rather than 2n for doing a findStateById() call twice. */
 	std::vector<State*> findStatesById(std::string, std::string);
-	int getLength();
+	long long unsigned getLength (void);
 	void add(State*);
 };
 
