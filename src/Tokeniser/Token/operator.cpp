@@ -1,52 +1,5 @@
 #include "operator.hpp"
 
-// Create an operator based on the inputted symbol
-Operator::Operator(char symbol) : Operator(type)
-{
-	// Assign precidence and type to the operator
-	switch (symbol) {
-	case '!':
-		type = Type::NEGATION;
-		break;
-	case '%':
-		type = Type::REMAINDER;
-		break;
-	case '&':
-		type = Type::AND;
-		break;
-	case '*':
-		type = Type::MULTIPLICATION;
-		break;
-	case '+':
-		type = Type::ADDITION;
-		break;
-	case '-':
-		type = Type::SUBTRACTION;
-		break;
-	case '/':
-		type = Type::DIVISION;
-		break;
-	case '<':
-		type = Type::COMPARISON;
-		break;
-	case '=':
-		type = Type::EQUALS;
-		break;
-	case '^':
-		type = Type::POWER;
-		break;
-	case '|':
-		type = Type::OR;
-		break;
-	default:
-		// An invalid operator has been used
-		// TODO: Create an error system... If the user accidentally uses x instead of * we could possibly show them where?
-		exit(EXIT_FAILURE);
-		break;
-	}
-	value = std::string(1, symbol);
-}
-
 Operator::Operator(Type operatorType)
 {
 	// If Operator (char) has been used then type will have already been set,

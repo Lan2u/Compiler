@@ -136,14 +136,12 @@ State * State::getNext(char input)
 /*
 Instansiate a new StateContainer.
 */
-/* NOTE : you don't need to do this. The base class constructor is already defined to do this
- *
 StateContainer::StateContainer (void) {
 	length = 0;
 	head = nullptr;
 	tail = nullptr;
 }
-*/
+
 
 /* Finds the given state in the list */
 /* Throws a State_Not_Found_Exception if the state is not found */
@@ -186,7 +184,7 @@ std::vector<State*> StateContainer::findStatesById(std::string id1, std::string 
 	return result;
 }
 
-int StateContainer::getLength()
+long long unsigned StateContainer::getLength()
 {
 	return length;
 }
