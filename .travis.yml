@@ -1,7 +1,7 @@
 language: cpp
 
 before_install:
-  - wget https://googletest.googlecode.com/files/gtest-1.7.0.zip
+  - wget https://github.com/google/googletest/archive/release-1.7.0.zip
   - unzip gtest-1.7.0.zip 
   - cd gtest-1.7.0/
   - ./configure --prefix=$TRAVIS_BUILD_DIR --with-pthreads=no
