@@ -154,10 +154,37 @@ BOOST_AUTO_TEST_CASE(Tokeniser_Tokenise_Int_Test) {
 
 }
 
-BOOST_AUTO_TEST_CASE(Tokeniser_Add_Transition_Test) {
+BOOST_AUTO_TEST_CASE(Tokeniser_Parse_Accepting_Transition_Test) {
 	Tokeniser tokeniser;
 	std::string str = "A,(,B,OPEN_BRACKET";
-	tokeniser.addTransition(str);
+	tokeniser.parseTransition(str);
+	BOOST_TEST(tokeniser.getNumberOfStates() == 2);
+}
+
+BOOST_AUTO_TEST_CASE(Tokeniser_Parse_Not_Accepting_Transition_Test) {
+	Tokeniser tokeniser;
+	std::string str = "A,#,B,";
+	tokeniser.parseTransition(str);
+	BOOST_TEST(tokeniser.getNumberOfStates() == 2);
+}
+
+BOOST_AUTO_TEST_CASE(Tokeniser_Add_Accepting_Transition_Test) {
+	Tokeniser tokeniser;
+	std::string initalStateId = "A";
+	std::string inputStr = "(";
+	std::string finalStateId = "B";
+	std::string acceptingStateToken = "OPEN_BRACKET";
+	tokeniser.addTransition(initalStateId, inputStr, finalStateId, acceptingStateToken);
+	BOOST_TEST(tokeniser.getNumberOfStates() == 2);
+}
+
+BOOST_AUTO_TEST_CASE(Tokeniser_Add_Not_Accepting_Transition_Test) {
+	Tokeniser tokeniser;
+	std::string initalStateId = "A";
+	std::string inputStr = "#";
+	std::string finalStateId = "B";
+	std::string acceptingStateToken = "";
+	tokeniser.addTransition(initalStateId, inputStr, finalStateId, acceptingStateToken);
 	BOOST_TEST(tokeniser.getNumberOfStates() == 2);
 }
 

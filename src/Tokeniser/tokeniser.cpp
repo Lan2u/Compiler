@@ -18,7 +18,7 @@ Tokeniser::Tokeniser(std::string fsaDefinitionFilePath){
 	}
 
 	for (std::string definitionLine; std::getline(fsaFileStream, definitionLine); ) {
-		addTransition(definitionLine);
+		parseTransition(definitionLine);
 	}
 
 }
@@ -43,7 +43,7 @@ void Tokeniser::addTransition(std::string initialStateId, std::string input, std
 	initialState->addTransition(input.at(0), finalState);
 }
 
-void Tokeniser::addTransition(std::string transitionStr)
+void Tokeniser::parseTransition(std::string transitionStr)
 {
 	std::vector<std::string> splitVec;
 	boost::split(splitVec, transitionStr, boost::is_any_of(FSA_DEF_DELIMITER));
