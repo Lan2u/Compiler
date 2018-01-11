@@ -50,7 +50,11 @@ DoubleLinkedList<T>::~DoubleLinkedList (void)
 	}
 }
 
-// Print list
+// Print list in the format with the head element first and tail last:
+// $pos1<tab>$data1
+// $pos2<tab>$data2
+// ...
+// Best, Avg, Worst Time Complexity: O(n)
 template <class T>
 void DoubleLinkedList<T>::print (void)
 {
@@ -61,7 +65,8 @@ void DoubleLinkedList<T>::print (void)
 	}
 }
 
-// Push the tail
+// Add an element to the end of the linked list (Tail position).
+// Best, Avg, Worst Time Complexity: O(1)
 template <class T>
 void DoubleLinkedList<T>::add (T data)
 {
@@ -72,15 +77,19 @@ void DoubleLinkedList<T>::add (T data)
 	newNode->previous = tail;
 	newNode->next = nullptr;
 
-	// Set the tail to newNode
-	if (head == nullptr)
+	
+	if (head == nullptr) {
+		// Set the tail to newNode since the list is empty
 		tail = head = newNode;
-	else {
+	} else {
+		// Add the new node and point the tail at the it.
 		tail->next = newNode;
 		tail = newNode;
 	}
 }
 
+// Removes the first instance of the given element (head->tail) and maintains existing ordering within the list.
+// Best, Avg, Worst Time Complexity: O(1)
 template<class T>
 void DoubleLinkedList<T>::remove (T element)
 {
@@ -103,6 +112,7 @@ void DoubleLinkedList<T>::remove (T element)
 				delete node;
 				length--;
 			}
+			return;
 		}
 		else {
 			node = node->next;
@@ -111,6 +121,7 @@ void DoubleLinkedList<T>::remove (T element)
 }
 
 // Check if the list contains an element
+// Best, Avg, Worst Time Complexity: O(n)
 template<class T>
 bool DoubleLinkedList<T>::contains (T element)
 {
