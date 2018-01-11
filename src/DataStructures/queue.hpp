@@ -106,15 +106,22 @@ T Queue<T>::dequeue (void)
 	return t;
 }
 
-// O(1) time complexity appending of the given queue to the end of this queue
+// O(1) time complexity appending of the given queue to the end of this queue. Much more efficient than multiple calls
+// to enqueue for large queues (Average case time: O(1) vs O(n)).
 // Does not update the pos because that would be an O(k) operation where k is
 // the length of the queue being appended
 template <class T>
 void Queue<T>::append (Queue<T>* queue)
 {
-	queue->head->previous = tail;
+	if (queue->getLength() == 0) {
+		// Decided not to throw an exception because this operation itself while unusual is valid.
+		return;
+	}
+
 	tail->next = queue->head;
-	length += queue->getLength();
+	queue->head->previous = tail;
+
+	length = length + queue->getLength();
 }
 
 #endif // QUEUE_HPP

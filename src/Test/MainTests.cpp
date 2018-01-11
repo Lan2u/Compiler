@@ -205,8 +205,8 @@ BOOST_AUTO_TEST_CASE(Queue_Enqueue_Three_Dequeue_All_Test) {
 }
 
 BOOST_AUTO_TEST_CASE(Queue_Append_Test) {
-	Queue<int> queue1;
-	Queue<int> queue2;
+	Queue<int> *queue1 = new Queue<int>();
+	Queue<int> *queue2 = new Queue<int>();
 
 	int a = 1;
 	int b = 2;
@@ -215,24 +215,46 @@ BOOST_AUTO_TEST_CASE(Queue_Append_Test) {
 	int e = 5;
 	int f = 6;
 
-	queue1.enqueue(a);
-	queue1.enqueue(b);
-	queue1.enqueue(c);
+	queue1->enqueue(a);
+	queue1->enqueue(b);
+	queue1->enqueue(c);
 
-	queue2.enqueue(d);
-	queue2.enqueue(e);
-	queue2.enqueue(f);
+	queue2->enqueue(d);
+	queue2->enqueue(e);
+	queue2->enqueue(f);
 
-	queue1.append(&queue2);
+	queue1->append(queue2);
 
-	BOOST_TEST(queue1.getLength() == 6);
+	BOOST_TEST(queue1->getLength() == 6);
+}
 
-	BOOST_TEST(a == queue1.dequeue());
-	BOOST_TEST(b == queue1.dequeue());
-	BOOST_TEST(c == queue1.dequeue());
-	BOOST_TEST(d == queue1.dequeue());
-	BOOST_TEST(e == queue1.dequeue());
-	BOOST_TEST(f == queue1.dequeue());
+BOOST_AUTO_TEST_CASE(Queue_Append_Dequeue_All_Test) {
+	Queue<int> *queue1 = new Queue<int>();
+	Queue<int> *queue2 = new Queue<int>();
+
+	int a = 1;
+	int b = 2;
+	int c = 3;
+	int d = 4;
+	int e = 5;
+	int f = 6;
+
+	queue1->enqueue(a);
+	queue1->enqueue(b);
+	queue1->enqueue(c);
+
+	queue2->enqueue(d);
+	queue2->enqueue(e);
+	queue2->enqueue(f);
+
+	queue1->append(queue2);
+
+	BOOST_TEST(a == queue1->dequeue());
+	BOOST_TEST(b == queue1->dequeue());
+	BOOST_TEST(c == queue1->dequeue());
+	BOOST_TEST(d == queue1->dequeue());
+	BOOST_TEST(e == queue1->dequeue());
+	BOOST_TEST(f == queue1->dequeue());
 }
 
 BOOST_AUTO_TEST_SUITE_END()
