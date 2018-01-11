@@ -91,9 +91,11 @@ T Queue<T>::dequeue (void)
 	// Save the memory location of the old head
 	Node *tn = head;
 
-	// Set the head to the next node and it's previos to null
 	head = head->next;
-	head->previous = nullptr;
+	if (head != nullptr){
+		// If the head is nullptr then it indicates the list is now empty and so there is no node to set the previous value of.
+		head->previous = nullptr;
+	}
 
 	// Delete the old tail
 	delete tn;
