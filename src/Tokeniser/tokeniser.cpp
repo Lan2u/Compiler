@@ -23,15 +23,21 @@ Tokeniser::Tokeniser(std::string fsaDefinitionFilePath){
 
 }
 
-void Tokeniser::addTransition(std::string initialStateId, std::string input, std::string finalStateId, std::string acceptingTokenTypeStr) {
-	State* initialState = states.findStateById(initialStateId);
-	if (initialState == nullptr) {
+void Tokeniser::addTransition(std::string initialStateId, std::string inputChar, std::string finalStateId, std::string acceptingTokenTypeStr) {
+	State* initialState;
+	State* finalState;
+	try {
+		initialState = states.findStateById(initialStateId);
+	}
+	catch (State_Not_Found_Exception) {
 		initialState = new State(initialStateId);
 		states.add(initialState);
 	}
 
-	State* finalState = states.findStateById(finalStateId);
-	if (finalState == nullptr) {
+	try {
+		finalState = states.findStateById(finalStateId);
+	}
+	catch (State_Not_Found_Exception) {
 		finalState = new State(finalStateId);
 		states.add(finalState);
 	}
@@ -40,7 +46,7 @@ void Tokeniser::addTransition(std::string initialStateId, std::string input, std
 		finalState->setAccepting(acceptingTokenTypeStr);
 	}
 
-	initialState->addTransition(input.at(0), finalState);
+	initialState->addTransition(inputChar.at(0), finalState);
 }
 
 void Tokeniser::parseTransition(std::string transitionStr)

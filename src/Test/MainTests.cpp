@@ -55,7 +55,7 @@ BOOST_AUTO_TEST_CASE(StateContainers_Add_5_Test) {
 	BOOST_TEST(s.getLength() == 5);
 }
 
-BOOST_AUTO_TEST_CASE(StateContainer_Add_5_Find_State_Test) {
+BOOST_AUTO_TEST_CASE(StateContainer_Add_5_Find_States_Test) {
 	StateContainer s;
 	std::string id1 = "1";
 	std::string id2 = "2";
@@ -74,8 +74,48 @@ BOOST_AUTO_TEST_CASE(StateContainer_Add_5_Find_State_Test) {
 	s.add(state3);
 	s.add(state4);
 	s.add(state5);
-	State *found = s.findStateById(id3);
-	BOOST_TEST(found == state3);
+
+	State *state1Found = s.findStateById(id1);
+	State *state2Found = s.findStateById(id2);
+	State *state3Found = s.findStateById(id3);
+	State *state4Found = s.findStateById(id4);
+	State *state5Found = s.findStateById(id5);
+
+	BOOST_TEST(state1Found == state1);
+	BOOST_TEST(state2Found == state2);
+	BOOST_TEST(state3Found == state3);
+	BOOST_TEST(state4Found == state4);
+	BOOST_TEST(state5Found == state5);
+}
+
+BOOST_AUTO_TEST_CASE(StateContainer_Empty_Find_State_Test) {
+	StateContainer s;
+	std::string id = "state1Id";
+
+	try {
+		State* state = s.findStateById(id);
+		BOOST_TEST(0);
+	}
+	catch (State_Not_Found_Exception) {
+		BOOST_TEST(1);
+	}
+}
+
+BOOST_AUTO_TEST_CASE(StateContainer_Add_1_Find_Not_Present_State_Test) {
+	StateContainer s;
+	std::string id = "state1Id";
+	std::string id2 = "state2Id";
+
+	State* state1 = new State(id);
+	s.add(state1);
+
+	try {
+		State* state = s.findStateById(id2);
+		BOOST_TEST(0);
+	}
+	catch (State_Not_Found_Exception) {
+		BOOST_TEST(1);
+	}
 }
 
 BOOST_AUTO_TEST_SUITE_END()
