@@ -66,7 +66,7 @@ template <class T>
 void DoubleLinkedList<T>::add (T data)
 {
 	// Create a new node and set it's fields
-	Node *newNode = new Node;
+	Node *newNode = new Node();
 	newNode->data = data;
 	newNode->pos = length++;
 	newNode->previous = tail;

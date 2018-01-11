@@ -75,7 +75,7 @@ public:
 	unsigned getPos(); 
 
 	// Set the absolute position in the stream. Returns true if successful and false if not. If unsuccessful the current position is not moved.  O(n) n=length of token stream
-	bool setPos(unsigned pos); 
+	bool setPos(int pos); 
 };
 
 #endif // TOKENSTREAMITERATOR_HPP

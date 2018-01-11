@@ -95,7 +95,7 @@ public:
 	Token* tokeniseString(std::string);
 
 	// Sets the initial state. 
-	unsigned getNumberOfStates();
+	unsigned long long getNumberOfStates();
 	void setInitialState(std::string stateId);
 	void reset();
 };

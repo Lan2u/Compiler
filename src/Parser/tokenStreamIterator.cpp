@@ -109,7 +109,8 @@ unsigned TokenStreamIterator::getPos()
 }
 
 // Time complexity is bounded by n. Worst case time complexity and average time complexities are O(n). Best case O(1)
-bool TokenStreamIterator::setPos(unsigned pos)
+// TODO replace bool to represent success/fail with an exception.
+bool TokenStreamIterator::setPos(int pos)
 {
 	if (pos > currentLength) {
 		return false; // Not possible to set position
@@ -125,4 +126,5 @@ bool TokenStreamIterator::setPos(unsigned pos)
 			previousToken();
 		}
 	}
+	return true; // The move was successful.
 }

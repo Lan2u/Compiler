@@ -64,7 +64,7 @@ void Tokeniser::addTransition(std::string transitionStr)
 Token* Tokeniser::tokeniseString(std::string str)
 {
 	reset();
-	for (int i = 0; i < str.length(); i++) {
+	for (unsigned i = 0; i < str.length(); i++) {
 		currentState = currentState->getNext(str.at(i));
 	}
 	
@@ -81,7 +81,7 @@ Tokeniser::Tokeniser(void) {
 	reset();
 }
 
-unsigned Tokeniser::getNumberOfStates()
+unsigned long long Tokeniser::getNumberOfStates()
 {
 	return states.getLength();
 }
