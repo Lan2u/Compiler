@@ -9,6 +9,7 @@
 #include "../Parser/parser.hpp"
 #include "../Tokeniser/Token/number.hpp"
 
+#include <iostream> // For testing
 #include <string>
 
 BOOST_AUTO_TEST_CASE(Test_to_make_sure_tests_work) {
@@ -73,8 +74,7 @@ BOOST_AUTO_TEST_CASE(StateContainer_Add_5_Find_State_Test) {
 	s.add(state3);
 	s.add(state4);
 	s.add(state5);
-
-	State* found = s.findStateById(id3);
+	State *found = s.findStateById(id3);
 	BOOST_TEST(found == state3);
 }
 

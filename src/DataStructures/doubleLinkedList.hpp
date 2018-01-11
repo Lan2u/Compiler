@@ -88,21 +88,21 @@ void DoubleLinkedList<T>::remove (T element)
 	while (node != nullptr) {
 		if (node->data == element) {
 			if (node == head) {
-				delete node;
-				head = nullptr;
-				tail = nullptr;
-				length = 0;
-			}
-			if (node == tail) {
-				node->previous->next = nullptr;
+				head = head->next;
 				delete node;
 				length--;
 			}
-
-			node->previous->next = node->next;
-			node->next->previous = node->previous;
-			delete node;
-			length--;
+			else if (node == tail) {
+				tail->previous->next = nullptr;
+				delete node;
+				length--;
+			}
+			else {
+				node->previous->next = node->next;
+				node->next->previous = node->previous;
+				delete node;
+				length--;
+			}
 		}
 		else {
 			node = node->next;

@@ -142,10 +142,20 @@ StateContainer::StateContainer (void) {
 	tail = nullptr;
 }
 
+// Delete nodes
+StateContainer::~StateContainer (void)
+{
+	Node *n = head, *tn;
+	while ((tn = n) != nullptr) {
+		n = n->next;
+		delete tn;
+	}
+}
+
 
 /* Finds the given state in the list */
 /* Throws a State_Not_Found_Exception if the state is not found */
-State * StateContainer::findStateById(std::string id) {
+State *StateContainer::findStateById(std::string id) {
 	Node *node = head;
 	while (node != nullptr) {
 		if (node->state->getId() == id) {
@@ -192,15 +202,16 @@ long long unsigned StateContainer::getLength()
 /* Add the given state to the state container. Makes no check for duplicate */
 void StateContainer::add(State * state)
 {
-	Node node(state);
-	node.next = nullptr;
+	Node *node = new Node(state);
+	node->next = nullptr;
 
 	if (head == nullptr) {
-		head = &node;
+		head = node;
 		tail = head;
 	}
 	else {
-		tail->next = &node;
+		tail->next = node;
+		tail = node;
 	}
 
 	length++;

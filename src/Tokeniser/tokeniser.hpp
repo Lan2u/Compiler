@@ -36,7 +36,7 @@ public:
 	
 	// Getters
 	std::string getAcceptingTokenTypeStr();
-	std::string getId() { return stateId; };
+	std::string getId() const { return stateId; };
 };
 
 class State_Not_Found_Exception : public std::exception {
@@ -57,11 +57,13 @@ private:
 		State *state;
 		Node (State *state) {
 			this->state = state;
+			next = nullptr;
 		}
 	} *head, *tail;
 	DoubleLinkedList<State*> states;
 public:
 	StateContainer(void);
+	~StateContainer(void);
 	/*Find the state within the state container that has the given id or return a nullptr*/
 	State* findStateById(std::string);
 	/* Find 2 states by the id within the state container. 
