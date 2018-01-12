@@ -3,6 +3,7 @@
 #define BOOST_TEST_MODULE Main Tests
 #include <boost/test/included/unit_test.hpp>
 
+// Files being tested.
 #include "../DataStructures/doubleLinkedList.hpp"
 #include "../DataStructures/queue.hpp"
 #include "../Tokeniser/tokeniser.hpp"
@@ -12,10 +13,10 @@
 #include <iostream> // For testing
 #include <string>
 
-BOOST_AUTO_TEST_CASE(Test_to_make_sure_tests_work) {
+BOOST_AUTO_TEST_CASE(Always_Passes_Test) {
+	// To check that tests are passing correctly.
 	int i = 1 + 1;
 	BOOST_TEST(i == 2);
-	//BOOST_TEST(i == 1);
 }
 
 BOOST_AUTO_TEST_SUITE(StateContainerTests)
@@ -113,9 +114,16 @@ BOOST_AUTO_TEST_CASE(StateContainer_Add_1_Find_Not_Present_State_Test) {
 		State* state = s.findStateById(id2);
 		BOOST_TEST(0);
 	}
-	catch (State_Not_Found_Exception) {
+	catch (State_Not_Found_Exception& e) {
 		BOOST_TEST(1);
 	}
+}
+
+BOOST_AUTO_TEST_CASE(Create_State_Test) {
+	std::string id = "state1Id";
+	State* state1 = new State(id);
+	BOOST_TEST(state1->getId() == id);
+	BOOST_TEST(state1->isAccepting() == false);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

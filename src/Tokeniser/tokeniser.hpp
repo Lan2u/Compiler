@@ -40,7 +40,7 @@ public:
 };
 
 class State_Not_Found_Exception : public std::exception {
-	virtual const char* what() const throw() {
+	const char* what() const throw() {
 		return "The state wasn't found!";
 	}
 };

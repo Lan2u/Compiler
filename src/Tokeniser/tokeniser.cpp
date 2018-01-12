@@ -110,7 +110,7 @@ State::State(std::string id)
 
 // Return true if the state is an accepting state.
 bool State::isAccepting() {
-	return (acceptingTokenTypeStr == "");
+	return !(acceptingTokenTypeStr == "");
 }
 
 std::string State::getAcceptingTokenTypeStr()
