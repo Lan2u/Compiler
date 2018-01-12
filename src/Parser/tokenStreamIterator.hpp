@@ -4,6 +4,15 @@
 #include "../DataStructures/doubleLinkedList.hpp"
 #include "../DataStructures/queue.hpp"
 
+class No_Token_Found_Exception : public std::exception {
+public:
+	No_Token_Found_Exception(void) : std::exception() {};
+
+	const char* what() const throw() {
+		return "No Token Found at the Current Position!";
+	}
+};
+
 // Iterates over the token stream keeping track of the current position. This is required for the recusrive descent parser.
 // Ordering is maintained with first elements being added being the first elements that are going to be used however do not want to remove elements when we do this and want to be able to access
 // anywhere in the token stream in certain situations. Each position also needs to have an index so for that reason a double linked list like structure is used not a queue. A double linked list
@@ -48,7 +57,7 @@ public:
 
 	// Add tokens to the token stream iterator
 	void queueToken(Token*); // O (1)
-	void queueTokens(Queue<Token*>); // O(k) where k is length of the queue
+	void queueTokens(Queue<Token*>*); // O(k) where k is length of the queue
 
 	// Return true if there is another token after the current position. O(1) in all cases.
 	bool hasNext();
@@ -71,8 +80,8 @@ public:
 	// O(1) time complexity in all cases.
 	unsigned remove();
 
-	// Get the absolute position in the stream where 0 is the first token
-	unsigned getPos(); 
+	// Get the absolute position in the stream where 0 is the first token. -1 indicates the stream is empty.
+	int getPos(); 
 
 	// Set the absolute position in the stream. Returns true if successful and false if not. If unsuccessful the current position is not moved.  O(n) n=length of token stream
 	bool setPos(int pos); 

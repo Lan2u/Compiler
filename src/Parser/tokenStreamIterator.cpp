@@ -27,9 +27,9 @@ void TokenStreamIterator::queueToken(Token * token)
 	currentLength++;
 }
 
-void TokenStreamIterator::queueTokens(Queue<Token*> tokenQueue) {
-	while (tokenQueue.getLength() > 0) {
-		queueToken(tokenQueue.dequeue());
+void TokenStreamIterator::queueTokens(Queue<Token*>* tokenQueue) {
+	while (tokenQueue->getLength() > 0) {
+		queueToken(tokenQueue->dequeue());
 	}
 }
 
@@ -45,8 +45,7 @@ bool TokenStreamIterator::hasPrevious() {
 Token * TokenStreamIterator::nextToken()
 {
 	if (!hasNext()) {
-		// TODO handle there being no next token.
-		return nullptr;
+		throw No_Token_Found_Exception();
 	}
 
 	currentNode = currentNode->next;
@@ -56,8 +55,7 @@ Token * TokenStreamIterator::nextToken()
 
 Token * TokenStreamIterator::previousToken() {
 	if (!hasPrevious()) {
-		// TODO handle there being no previous token
-		return nullptr;
+		throw No_Token_Found_Exception();
 	}
 	
 	currentNode = currentNode->previous;
@@ -73,8 +71,7 @@ Token * TokenStreamIterator::getToken()
 unsigned TokenStreamIterator::remove()
 {
 	if (currentNode == nullptr) {
-		// TODO handle the current tokens' node being already removed.
-		return -1;
+		throw No_Token_Found_Exception();
 	}
 
 	Node<Token*>* node = currentNode;
@@ -103,13 +100,12 @@ unsigned TokenStreamIterator::remove()
 	return currentPosition;
 }
 
-unsigned TokenStreamIterator::getPos()
+int TokenStreamIterator::getPos()
 {
 	return currentPosition;
 }
 
 // Time complexity is bounded by n. Worst case time complexity and average time complexities are O(n). Best case O(1)
-// TODO replace bool to represent success/fail with an exception.
 bool TokenStreamIterator::setPos(int pos)
 {
 	if (pos > currentLength) {
