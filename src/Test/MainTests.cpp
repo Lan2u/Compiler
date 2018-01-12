@@ -89,6 +89,44 @@ BOOST_AUTO_TEST_CASE(StateContainer_Add_5_Find_States_Test) {
 	BOOST_TEST(state5Found == state5);
 }
 
+BOOST_AUTO_TEST_CASE(StateContainer_Add_2_FindStates_Test) {
+	StateContainer s;
+	std::string id1 = "1";
+	std::string id2 = "2";
+
+	State* state1 = new State(id1);
+	State* state2 = new State(id2);
+
+	s.add(state1);
+	s.add(state2);
+
+	std::vector<State*> states = s.findStatesById(id1, id2);
+
+	State* state1Found = states.at(0);
+	State* state2Found = states.at(1);
+
+	BOOST_TEST(state1Found == state1);
+	BOOST_TEST(state2Found == state2);
+}
+
+BOOST_AUTO_TEST_CASE(StateContainer_Add_1_Find2States_Test) {
+	StateContainer s;
+	std::string id1 = "1";
+	std::string id2 = "2";
+
+	State* state1 = new State(id1);
+
+	s.add(state1);
+
+	std::vector<State*> states = s.findStatesById(id1, id2);
+
+	State* state1Found = states.at(0);
+	State* state2Found = states.at(1);
+
+	BOOST_TEST(state1Found == state1);
+	BOOST_TEST(state2Found == nullptr);
+}
+
 BOOST_AUTO_TEST_CASE(StateContainer_Empty_Find_State_Test) {
 	StateContainer s;
 	std::string id = "state1Id";
@@ -124,6 +162,14 @@ BOOST_AUTO_TEST_CASE(Create_State_Test) {
 	State* state1 = new State(id);
 	BOOST_TEST(state1->getId() == id);
 	BOOST_TEST(state1->isAccepting() == false);
+}
+
+BOOST_AUTO_TEST_CASE(Create_Accepting_State_Test) {
+	std::string id = "state1Id";
+	State* state1 = new State(id);
+	state1->setAccepting("OPEN_BRACKET");
+	BOOST_TEST(state1->getId() == id);
+	BOOST_TEST(state1->isAccepting() == true);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
