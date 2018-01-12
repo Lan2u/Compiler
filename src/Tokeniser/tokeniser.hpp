@@ -40,6 +40,9 @@ public:
 };
 
 class State_Not_Found_Exception : public std::exception {
+public:
+	State_Not_Found_Exception() : std::exception() {}
+
 	const char* what() const throw() {
 		return "The state wasn't found!";
 	}

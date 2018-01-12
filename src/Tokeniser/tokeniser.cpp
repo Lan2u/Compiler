@@ -169,7 +169,7 @@ State *StateContainer::findStateById(std::string id) {
 		}
 		node = node->next;
 	}
-	throw new State_Not_Found_Exception;
+	throw State_Not_Found_Exception();
 }
 
 /* Finds the 2 states which have the given id's and returns them in a vector in order
