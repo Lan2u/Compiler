@@ -25,8 +25,7 @@ private:
 	template <class T>
 	class Node {
 	public:
-		Node* next;
-		Node* previous;
+		Node *next, *previous;
 		T element;
 		Node(T element) {
 			next = nullptr;
@@ -35,17 +34,15 @@ private:
 		};
 		Node* getNext() {
 			return next;
-		};
+		}
 		Node* getPrevious() {
 			return previous;
-		};
+		}
 	};
 
 	// The current, head and tail nodes.
 	// Could of made it circular but didn't as the added simpilicity of the hasPrevious() method is worth the small extra space cost.
-	Node<Token*>* currentNode;
-	Node<Token*>* headNode; // Always position 0
-	Node<Token*>* tailNode; // Always position length - 1
+	Node<Token*>* *currentNode, *headNode, *tailNode;
 
 	// The current position and length of the stream.
 	int currentPosition;

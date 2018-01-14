@@ -854,9 +854,9 @@ BOOST_AUTO_TEST_CASE(TokenStreamIterator_Queue_3_setPos_End_Test) {
 
 BOOST_AUTO_TEST_CASE(TokenStreamIterator_Queue_3_setPos_Middle_Test) {
 	TokenStreamIterator tsi;
-	Token* token1 = new Token();
-	Token* token2 = new Token();
-	Token* token3 = new Token();
+	Token *token1 = new Token();
+	Token *token2 = new Token();
+	Token *token3 = new Token();
 
 	tsi.queueToken(token1);
 	tsi.queueToken(token2);

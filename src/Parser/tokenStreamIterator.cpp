@@ -8,7 +8,7 @@ TokenStreamIterator::TokenStreamIterator(void)
 	currentPosition = -1;
 }
 
-void TokenStreamIterator::queueToken(Token * token)
+void TokenStreamIterator::queueToken(Token *token)
 {
 	Node<Token*>* newNode = new Node<Token*>(token);
 
@@ -35,10 +35,11 @@ void TokenStreamIterator::queueTokens(Queue<Token*>* tokenQueue) {
 
 bool TokenStreamIterator::hasNext()
 {
-	return !(currentNode==nullptr || currentNode->getNext() == nullptr);
+	return !(currentNode == nullptr || currentNode->getNext() == nullptr);
 }
 
-bool TokenStreamIterator::hasPrevious() {
+bool TokenStreamIterator::hasPrevious()
+{
 	return !(currentNode == nullptr || currentNode->getPrevious() == nullptr);
 }
 
@@ -53,7 +54,7 @@ Token * TokenStreamIterator::nextToken()
 	return getToken();
 }
 
-Token * TokenStreamIterator::previousToken() {
+Token* TokenStreamIterator::previousToken() {
 	if (!hasPrevious()) {
 		throw No_Token_Found_Exception();
 	}
