@@ -41,19 +41,19 @@ public:
 	void queueTokens(Queue<Token*>*); // O(k) where k is length of the queue
 
 	// Return true if there is another token after the current position. O(1) in all cases.
-	bool hasNext();
+	bool hasNext(void);
 
 	// Return true if there is another token before the current position. O(1) in all cases.
-	bool hasPrevious();
+	bool hasPrevious(void);
 
 	// Get next token. O(1) in all cases.
-	Token* nextToken();
+	Token* nextToken(void);
 
 	// Get the previous token. O(1) in all cases.
-	Token * previousToken();
+	Token * previousToken(void);
 
 	// Get the token at the current position. O(1)
-	Token* getToken();
+	Token* getToken(void);
 
 	// Remove the current token from the tokens. Returns the new current position.
 	// In the case that the node removed is in the middle or start the returned value will be the same as before but this will be the next node (since the nodes have moved back).

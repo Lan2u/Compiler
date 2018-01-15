@@ -69,7 +69,7 @@ Token * TokenStreamIterator::getToken()
 	return currentNode->element;
 }
 
-unsigned TokenStreamIterator::remove (void)
+long long unsigned TokenStreamIterator::remove (void)
 {
 	if (currentNode == nullptr) {
 		throw No_Token_Found_Exception();
