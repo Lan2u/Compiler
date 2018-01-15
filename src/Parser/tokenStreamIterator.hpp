@@ -22,28 +22,11 @@ public:
 // This is effectively an interator for a navigatable doubly linked list. It could easily be made more generic using templates but I haven't done this because it isn't yet needed.
 class TokenStreamIterator {
 private:
-	template <class T>
-	class Node {
-	private:
-		Node *next, *previous;
-		T element;
-	public:
-		Node(T element) {
-			next = nullptr;
-			previous = nullptr;
-			Node::element = element;
-		}
-		Node* getNext() {
-			return next;
-		}
-		Node* getPrevious() {
-			return previous;
-		}
-	};
-
-	// The current, head and tail nodes.
-	// Could of made it circular but didn't as the added simpilicity of the hasPrevious() method is worth the small extra space cost.
-	Node<Token*>* *currentNode, *headNode, *tailNode;
+	struct Node {
+		Node *next = nullptr, *previous = nullptr;
+		Token *element;
+		Node (Token *element) { this->element = element; }
+	} *currentNode, *headNode, *tailNode;
 
 	// The current position and length of the stream.
 	int currentPosition;

@@ -10,7 +10,7 @@ TokenStreamIterator::TokenStreamIterator(void)
 
 void TokenStreamIterator::queueToken(Token *token)
 {
-	Node<Token*>* newNode = new Node<Token*>(token);
+	Node *newNode = new Node(token);
 
 	if (headNode == nullptr) {
 		headNode = newNode;
@@ -35,12 +35,12 @@ void TokenStreamIterator::queueTokens(Queue<Token*>* tokenQueue) {
 
 bool TokenStreamIterator::hasNext()
 {
-	return !(currentNode == nullptr || currentNode->TokenStreamIterator::Node<Token*>::getNext == nullptr);
+	return !(currentNode == nullptr || currentNode->next == nullptr);
 }
 
 bool TokenStreamIterator::hasPrevious()
 {
-	return !(currentNode == nullptr || currentNode->getPrevious() == nullptr);
+	return !(currentNode == nullptr || currentNode->previous == nullptr);
 }
 
 Token * TokenStreamIterator::nextToken()
@@ -75,21 +75,21 @@ unsigned TokenStreamIterator::remove()
 		throw No_Token_Found_Exception();
 	}
 
-	Node<Token*>* node = currentNode;
+	Node *node = currentNode;
 
 	if (hasPrevious() && hasNext()) { // Has previous and next nodes (is in middle).
-		currentNode->getPrevious()->next = currentNode->getNext();
-		currentNode = currentNode->getNext();
+		currentNode->previous->next = currentNode->next;
+		currentNode = currentNode->next;
 	}
 	else if (hasPrevious()) { // Has previous node but doesn't have a next node (is at end)
 		currentNode->previous->next = nullptr;
-		currentNode = currentNode->getPrevious();
+		currentNode = currentNode->previous;
 		currentPosition--;
 		
 	}
 	else if (hasNext()) { // Has a next node but doesn't have a previous node (is at start)
 		currentNode->next->previous = nullptr;
-		currentNode = currentNode->getNext();
+		currentNode = currentNode->next;
 	}
 	else { // Has neither a next node or a previous node (is the only node with a length of 1)
 		currentNode = nullptr;
