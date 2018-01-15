@@ -59,7 +59,7 @@ public:
 	// In the case that the node removed is in the middle or start the returned value will be the same as before but this will be the next node (since the nodes have moved back).
 	// In the case that the node removed is at the end the returned value/new current position will be the node previous to the one removed.
 	// O(1) time complexity in all cases.
-	unsigned remove (void);
+	long long unsigned remove (void);
 
 	// Get the absolute position in the stream where 0 is the first token. -1 indicates the stream is empty.
 	long long int getPos (void) const { return currentPosition; }
