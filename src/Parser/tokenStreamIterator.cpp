@@ -35,7 +35,7 @@ void TokenStreamIterator::queueTokens(Queue<Token*>* tokenQueue) {
 
 bool TokenStreamIterator::hasNext()
 {
-	return !(currentNode == nullptr || currentNode->getNext() == nullptr);
+	return !(currentNode == nullptr || currentNode->TokenStreamIterator::Node<Token*>::getNext == nullptr);
 }
 
 bool TokenStreamIterator::hasPrevious()

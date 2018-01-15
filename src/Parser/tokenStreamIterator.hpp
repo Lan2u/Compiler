@@ -24,14 +24,15 @@ class TokenStreamIterator {
 private:
 	template <class T>
 	class Node {
-	public:
+	private:
 		Node *next, *previous;
 		T element;
+	public:
 		Node(T element) {
 			next = nullptr;
 			previous = nullptr;
 			Node::element = element;
-		};
+		}
 		Node* getNext() {
 			return next;
 		}
