@@ -69,7 +69,7 @@ Token * TokenStreamIterator::getToken()
 	return currentNode->element;
 }
 
-unsigned TokenStreamIterator::remove()
+unsigned TokenStreamIterator::remove (void)
 {
 	if (currentNode == nullptr) {
 		throw No_Token_Found_Exception();
@@ -101,13 +101,8 @@ unsigned TokenStreamIterator::remove()
 	return currentPosition;
 }
 
-int TokenStreamIterator::getPos()
-{
-	return currentPosition;
-}
-
 // Time complexity is bounded by n. Worst case time complexity and average time complexities are O(n). Best case O(1)
-bool TokenStreamIterator::setPos(int pos)
+bool TokenStreamIterator::setPos(long long int pos)
 {
 	if (pos > currentLength) {
 		return false; // Not possible to set position

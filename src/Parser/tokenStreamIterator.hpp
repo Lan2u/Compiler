@@ -29,12 +29,12 @@ private:
 	} *currentNode, *headNode, *tailNode;
 
 	// The current position and length of the stream.
-	int currentPosition;
-	unsigned currentLength;
+	long long int currentPosition;
+	long long unsigned currentLength;
 
 public:
 	// Create a new token stream iterator.
-	TokenStreamIterator(void);
+	TokenStreamIterator (void);
 
 	// Add tokens to the token stream iterator
 	void queueToken(Token*); // O (1)
@@ -59,13 +59,13 @@ public:
 	// In the case that the node removed is in the middle or start the returned value will be the same as before but this will be the next node (since the nodes have moved back).
 	// In the case that the node removed is at the end the returned value/new current position will be the node previous to the one removed.
 	// O(1) time complexity in all cases.
-	unsigned remove();
+	long long unsigned remove (void);
 
 	// Get the absolute position in the stream where 0 is the first token. -1 indicates the stream is empty.
-	int getPos(); 
+	long long int getPos (void) const { return currentPosition; }
 
 	// Set the absolute position in the stream. Returns true if successful and false if not. If unsuccessful the current position is not moved.  O(n) n=length of token stream
-	bool setPos(int pos); 
+	bool setPos (long long int); 
 };
 
-#endif // TOKENSTREAMITERATOR_HPP
+#endif // TOKENSTREAMITERATOR_HP:
