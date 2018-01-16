@@ -5,7 +5,7 @@ TokenStreamIterator::TokenStreamIterator(void)
 	currentNode = nullptr;
 	headNode = nullptr;
 	currentLength = 0;
-	currentPosition = -1;
+	currentPosition = EMPTY_POS;
 }
 
 void TokenStreamIterator::queueToken(Token *token)
@@ -27,12 +27,6 @@ void TokenStreamIterator::queueToken(Token *token)
 	}
 
 	currentLength++;
-}
-
-void TokenStreamIterator::queueTokens(Queue<Token*>* tokenQueue) {
-	while (tokenQueue->getLength() > 0) {
-		queueToken(tokenQueue->dequeue());
-	}
 }
 
 bool TokenStreamIterator::hasNext()
@@ -76,7 +70,7 @@ Token * TokenStreamIterator::getToken()
 	}
 }
 
-long long unsigned TokenStreamIterator::remove (void)
+long long unsigned int TokenStreamIterator::remove (void)
 {
 	if (currentNode == nullptr) {
 		throw No_Token_Found_Exception();
@@ -100,7 +94,7 @@ long long unsigned TokenStreamIterator::remove (void)
 	}
 	else { // Has neither a next node or a previous node (is the only node with a length of 1)
 		currentNode = nullptr;
-		currentPosition--;
+		currentPosition = EMPTY_POS;
 	}
 
 	delete node;
@@ -108,13 +102,13 @@ long long unsigned TokenStreamIterator::remove (void)
 	return currentPosition;
 }
 
-long long int TokenStreamIterator::getPos(void)
+long long unsigned int TokenStreamIterator::getPos(void)
 {
 	return currentPosition;
 }
 
 // Time complexity is bounded by n. Worst case time complexity and average time complexities are O(n). Best case O(1)
-bool TokenStreamIterator::setPos(long long int pos)
+bool TokenStreamIterator::setPos(long long unsigned int pos)
 {
 	if (pos > currentLength) {
 		return false; // Not possible to set position

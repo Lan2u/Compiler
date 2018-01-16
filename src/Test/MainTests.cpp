@@ -424,46 +424,6 @@ BOOST_AUTO_TEST_CASE(TokenStreamIterator_Queue_2_Token_Test) {
 	tsi.queueToken(token2);
 }
 
-BOOST_AUTO_TEST_CASE(TokenStreamIterator_QueueTokens_2_Test) {
-	TokenStreamIterator tsi;
-	Token* token1 = new Token();
-	Token* token2 = new Token();
-
-	Queue<Token*> *tokens = new Queue<Token*>();
-	tokens->enqueue(token1);
-	tokens->enqueue(token2);
-
-	tsi.queueTokens(tokens);
-
-	BOOST_TEST(tsi.getToken() == token1);
-	BOOST_TEST(tsi.nextToken() == token2);
-}
-
-BOOST_AUTO_TEST_CASE(TokenStreamIterator_QueueTokens_5_Test) {
-	TokenStreamIterator tsi;
-	Token* token1 = new Token();
-	Token* token2 = new Token();
-	Token* token3 = new Token();
-	Token* token4 = new Token();
-	Token* token5 = new Token();
-
-	Queue<Token*> *tokens = new Queue<Token*>();
-	tokens->enqueue(token1);
-	tokens->enqueue(token2);
-	tokens->enqueue(token3);
-	tokens->enqueue(token4);
-	tokens->enqueue(token5);
-
-
-	tsi.queueTokens(tokens);
-
-	BOOST_TEST(tsi.getToken() == token1);
-	BOOST_TEST(tsi.nextToken() == token2);
-	BOOST_TEST(tsi.nextToken() == token3);
-	BOOST_TEST(tsi.nextToken() == token4);
-	BOOST_TEST(tsi.nextToken() == token5);
-}
-
 BOOST_AUTO_TEST_CASE(TokenStreamIterator_hasNext_Empty_Test) {
 	TokenStreamIterator tsi;
 

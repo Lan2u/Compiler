@@ -1,8 +1,8 @@
 #ifndef TOKENSTREAMITERATOR_HPP
 #define TOKENSTREAMITERATOR_HPP
 #include "../Tokeniser/Token/token.hpp"
-#include "../DataStructures/doubleLinkedList.hpp"
-#include "../DataStructures/queue.hpp"
+
+#define EMPTY_POS 0
 
 class No_Token_Found_Exception : public std::exception {
 public:
@@ -29,8 +29,8 @@ private:
 	} *currentNode, *headNode, *tailNode;
 
 	// The current position and length of the stream.
-	long long int currentPosition;
-	long long unsigned currentLength;
+	long long unsigned int currentPosition; // = 0 if the token stream iterator is empty.
+	long long unsigned int currentLength;
 
 public:
 	// Create a new token stream iterator.
@@ -38,7 +38,6 @@ public:
 
 	// Add tokens to the token stream iterator
 	void queueToken(Token*); // O (1)
-	void queueTokens(Queue<Token*>*); // O(k) where k is length of the queue
 
 	// Return true if there is another token after the current position. O(1) in all cases.
 	bool hasNext(void);
@@ -59,13 +58,13 @@ public:
 	// In the case that the node removed is in the middle or start the returned value will be the same as before but this will be the next node (since the nodes have moved back).
 	// In the case that the node removed is at the end the returned value/new current position will be the node previous to the one removed.
 	// O(1) time complexity in all cases.
-	long long unsigned remove (void);
+	long long unsigned int remove (void);
 
 	// Get the absolute position in the stream where 0 is the first token. -1 indicates the stream is empty.
-	long long int getPos(void);
+	long long unsigned int getPos(void);
 
 	// Set the absolute position in the stream. Returns true if successful and false if not. If unsuccessful the current position is not moved.  O(n) n=length of token stream
-	bool setPos (long long int); 
+	bool setPos (long long unsigned int); 
 };
 
-#endif // TOKENSTREAMITERATOR_HP:
+#endif // TOKENSTREAMITERATOR_HPP
