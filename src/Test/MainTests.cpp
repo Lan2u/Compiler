@@ -610,7 +610,7 @@ BOOST_AUTO_TEST_CASE(TokenStreamIterator_Queue_1_Remove_1_Test) {
 
 	tsi.remove();
 
-	BOOST_TEST(tsi.getPos() == -1);
+	BOOST_TEST(tsi.getPos() == 0);
 }
 
 BOOST_AUTO_TEST_CASE(TokenStreamIterator_Queue_2_Remove_1_Test) {
@@ -641,9 +641,8 @@ BOOST_AUTO_TEST_CASE(TokenStreamIterator_Queue_3_atEnd_Remove_1_Test) {
 	tsi.nextToken();
 	tsi.nextToken();
 
-	tsi.remove();
-
-	BOOST_TEST(tsi.getPos() == 0);
+	BOOST_TEST(tsi.remove() == 2);
+	BOOST_TEST(tsi.getPos() == 2);
 	BOOST_TEST(tsi.getToken() == token2);
 }
 
@@ -661,7 +660,7 @@ BOOST_AUTO_TEST_CASE(TokenStreamIterator_Queue_3_atStart_Remove_1_Test) {
 
 	tsi.remove();
 
-	BOOST_TEST(tsi.getPos() == 0);
+	BOOST_TEST(tsi.getPos() == 1);
 	BOOST_TEST(tsi.getToken() == token2);
 }
 
@@ -680,13 +679,13 @@ BOOST_AUTO_TEST_CASE(TokenStreamIterator_Queue_3_inMiddle_Remove_1_Test) {
 
 	tsi.remove();
 
-	BOOST_TEST(tsi.getPos() == 0);
-	BOOST_TEST(tsi.getToken() == token2);
+	BOOST_TEST(tsi.getPos() == 2);
+	BOOST_TEST(tsi.getToken() == token3);
 }
 
 BOOST_AUTO_TEST_CASE(TokenStreamIterator_getPos_Empty_Test) {
 	TokenStreamIterator tsi;
-	BOOST_TEST(tsi.getPos() == -1);
+	BOOST_TEST(tsi.getPos() == 0);
 }
 
 BOOST_AUTO_TEST_CASE(TokenStreamIterator_Queue_2_getPos_Test) {
@@ -714,7 +713,7 @@ BOOST_AUTO_TEST_CASE(TokenStreamIterator_Queue_3_atEnd_getPos_Test) {
 	tsi.nextToken();
 	tsi.nextToken();
 
-	BOOST_TEST(tsi.getPos() == 2);
+	BOOST_TEST(tsi.getPos() == 3);
 }
 
 BOOST_AUTO_TEST_CASE(TokenStreamIterator_Queue_3_atStart_getPos_Test) {
@@ -798,8 +797,8 @@ BOOST_AUTO_TEST_CASE(TokenStreamIterator_Queue_3_setPos_End_Test) {
 	tsi.queueToken(token2);
 	tsi.queueToken(token3);
 
-	BOOST_TEST(tsi.setPos(2));
-	BOOST_TEST(tsi.getPos() == 2);
+	BOOST_TEST(tsi.setPos(3));
+	BOOST_TEST(tsi.getPos() == 3);
 	BOOST_TEST(tsi.getToken() == token3);
 }
 
@@ -813,8 +812,8 @@ BOOST_AUTO_TEST_CASE(TokenStreamIterator_Queue_3_setPos_Middle_Test) {
 	tsi.queueToken(token2);
 	tsi.queueToken(token3);
 
-	BOOST_TEST(tsi.setPos(1));
-	BOOST_TEST(tsi.getPos() == 1);
+	BOOST_TEST(tsi.setPos(2));
+	BOOST_TEST(tsi.getPos() == 2);
 	BOOST_TEST(tsi.getToken() == token2);
 }
 
