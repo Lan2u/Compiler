@@ -406,15 +406,6 @@ BOOST_AUTO_TEST_SUITE(TokenStreamIteratorTests)
 
 BOOST_AUTO_TEST_CASE(TokenStreamIterator_Create_Test) {
 	TokenStreamIterator tsi;
-	BOOST_TEST(tsi.getPos() == -1);
-	try {
-		tsi.getToken();
-		BOOST_TEST(false); // Should of thrown a No_Token_Found_Exception by now.
-	}
-	catch (No_Token_Found_Exception& e) {
-		BOOST_TEST(true);
-	}
-	
 }
 
 BOOST_AUTO_TEST_CASE(TokenStreamIterator_Queue_1_Token_Test) {

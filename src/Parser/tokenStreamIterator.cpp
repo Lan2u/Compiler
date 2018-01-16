@@ -13,15 +13,17 @@ void TokenStreamIterator::queueToken(Token *token)
 	Node *newNode = new Node(token);
 
 	if (headNode == nullptr) {
+		newNode->previous = nullptr;
 		headNode = newNode;
 		tailNode = headNode;
-		newNode->previous = nullptr;
+		headNode->next = nullptr;
 		currentPosition = 0;
+		currentNode = headNode;
 	}
 	else {
 		newNode->previous = tailNode;
-		tailNode->next = newNode;
 		newNode->next = nullptr;
+		tailNode->next = newNode;
 	}
 
 	currentLength++;
@@ -66,7 +68,12 @@ Token* TokenStreamIterator::previousToken() {
 
 Token * TokenStreamIterator::getToken()
 {
-	return currentNode->element;
+	if (currentNode == nullptr) {
+		throw No_Token_Found_Exception();
+	}
+	else {
+		return currentNode->element;
+	}
 }
 
 long long unsigned TokenStreamIterator::remove (void)
@@ -98,6 +105,11 @@ long long unsigned TokenStreamIterator::remove (void)
 
 	delete node;
 	currentLength--;
+	return currentPosition;
+}
+
+long long int TokenStreamIterator::getPos(void)
+{
 	return currentPosition;
 }
 

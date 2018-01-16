@@ -62,7 +62,7 @@ public:
 	long long unsigned remove (void);
 
 	// Get the absolute position in the stream where 0 is the first token. -1 indicates the stream is empty.
-	long long int getPos (void) const { return currentPosition; }
+	long long int getPos(void);
 
 	// Set the absolute position in the stream. Returns true if successful and false if not. If unsuccessful the current position is not moved.  O(n) n=length of token stream
 	bool setPos (long long int); 
