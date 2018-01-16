@@ -623,7 +623,7 @@ BOOST_AUTO_TEST_CASE(TokenStreamIterator_Queue_2_Remove_1_Test) {
 
 	tsi.remove();
 
-	BOOST_TEST(tsi.getPos() == 0);
+	BOOST_TEST(tsi.getPos() == 1);
 	BOOST_TEST(tsi.getToken() == token2);
 }
 
@@ -638,8 +638,8 @@ BOOST_AUTO_TEST_CASE(TokenStreamIterator_Queue_3_atEnd_Remove_1_Test) {
 	tsi.queueToken(token3);
 
 	// Move to end
-	tsi.nextToken();
-	tsi.nextToken();
+	BOOST_TEST(token2 == tsi.nextToken()); // Move to token2
+	BOOST_TEST(token3 == tsi.nextToken()); // Move to token3
 
 	BOOST_TEST(tsi.remove() == 2);
 	BOOST_TEST(tsi.getPos() == 2);
@@ -658,9 +658,10 @@ BOOST_AUTO_TEST_CASE(TokenStreamIterator_Queue_3_atStart_Remove_1_Test) {
 
 	// Already at start.
 
-	tsi.remove();
+	int startPos = EMPTY_POS + 1;
 
-	BOOST_TEST(tsi.getPos() == 1);
+	BOOST_TEST(tsi.remove() == startPos);
+	BOOST_TEST(tsi.getPos() == startPos);
 	BOOST_TEST(tsi.getToken() == token2);
 }
 
@@ -675,10 +676,8 @@ BOOST_AUTO_TEST_CASE(TokenStreamIterator_Queue_3_inMiddle_Remove_1_Test) {
 	tsi.queueToken(token3);
 
 	// Move to middle
-	tsi.nextToken();
-
-	tsi.remove();
-
+	BOOST_TEST(tsi.nextToken() == token2); // Position 2
+	BOOST_TEST(tsi.remove() == 2); // Remove the token which should now mean the stream contains token1->token3 rather than token1->token2->token3.
 	BOOST_TEST(tsi.getPos() == 2);
 	BOOST_TEST(tsi.getToken() == token3);
 }
@@ -696,7 +695,7 @@ BOOST_AUTO_TEST_CASE(TokenStreamIterator_Queue_2_getPos_Test) {
 	tsi.queueToken(token1);
 	tsi.queueToken(token2);
 
-	BOOST_TEST(tsi.getPos() == 0);
+	BOOST_TEST(tsi.getPos() == 1);
 }
 
 BOOST_AUTO_TEST_CASE(TokenStreamIterator_Queue_3_atEnd_getPos_Test) {
@@ -710,8 +709,8 @@ BOOST_AUTO_TEST_CASE(TokenStreamIterator_Queue_3_atEnd_getPos_Test) {
 	tsi.queueToken(token3);
 
 	// Move to end
-	tsi.nextToken();
-	tsi.nextToken();
+	tsi.nextToken(); // Move to token 2
+	tsi.nextToken(); // Move to token 3
 
 	BOOST_TEST(tsi.getPos() == 3);
 }
@@ -726,7 +725,7 @@ BOOST_AUTO_TEST_CASE(TokenStreamIterator_Queue_3_atStart_getPos_Test) {
 	tsi.queueToken(token2);
 	tsi.queueToken(token3);
 
-	BOOST_TEST(tsi.getPos() == 0);
+	BOOST_TEST(tsi.getPos() == EMPTY_POS + 1);
 }
 
 BOOST_AUTO_TEST_CASE(TokenStreamIterator_Queue_3_inMiddle_getPos_Test) {
@@ -742,7 +741,7 @@ BOOST_AUTO_TEST_CASE(TokenStreamIterator_Queue_3_inMiddle_getPos_Test) {
 	// Move to middle
 	tsi.nextToken();
 
-	BOOST_TEST(tsi.getPos() == 1);
+	BOOST_TEST(tsi.getPos() == 2);
 }
 
 BOOST_AUTO_TEST_CASE(TokenStreamIterator_Empty_setPos_Out_Of_Range_Test) {
@@ -759,7 +758,7 @@ BOOST_AUTO_TEST_CASE(TokenStreamIterator_Queue_1_setPos_Out_Of_Range_Test) {
 	BOOST_TEST(tsi.setPos(2) == false);
 }
 
-BOOST_AUTO_TEST_CASE(TokenStreamIterator_Queue_2_setPos_1_Test) {
+BOOST_AUTO_TEST_CASE(TokenStreamIterator_Queue_2_setPos_2_Test) {
 	TokenStreamIterator tsi;
 	Token* token1 = new Token();
 	Token* token2 = new Token();
@@ -767,8 +766,8 @@ BOOST_AUTO_TEST_CASE(TokenStreamIterator_Queue_2_setPos_1_Test) {
 	tsi.queueToken(token1);
 	tsi.queueToken(token2);
 
-	BOOST_TEST(tsi.setPos(1));
-	BOOST_TEST(tsi.getPos() == 1);
+	BOOST_TEST(tsi.setPos(2));
+	BOOST_TEST(tsi.getPos() == 2);
 	BOOST_TEST(tsi.getToken() == token2);
 }
 
@@ -782,8 +781,8 @@ BOOST_AUTO_TEST_CASE(TokenStreamIterator_Queue_3_setPos_Start_Test) {
 	tsi.queueToken(token2);
 	tsi.queueToken(token3);
 
-	BOOST_TEST(tsi.setPos(0));
-	BOOST_TEST(tsi.getPos() == 0);
+	BOOST_TEST(tsi.setPos(1));
+	BOOST_TEST(tsi.getPos() == 1);
 	BOOST_TEST(tsi.getToken() == token1);
 }
 
@@ -815,6 +814,11 @@ BOOST_AUTO_TEST_CASE(TokenStreamIterator_Queue_3_setPos_Middle_Test) {
 	BOOST_TEST(tsi.setPos(2));
 	BOOST_TEST(tsi.getPos() == 2);
 	BOOST_TEST(tsi.getToken() == token2);
+}
+
+BOOST_AUTO_TEST_CASE(TokenStreamIterator_setPos_Empty_Test) {
+	TokenStreamIterator tsi;
+	BOOST_TEST(tsi.setPos(0) == false);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

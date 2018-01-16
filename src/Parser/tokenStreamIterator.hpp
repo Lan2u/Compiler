@@ -19,7 +19,7 @@ public:
 // cannot just be used because it doesn't have the required methods and the new methods require very tight binding to the underlying nodes and so cannot rely on double linked list exact 
 // implementation being always exactly the same.
 
-// This is effectively an interator for a navigatable doubly linked list. It could easily be made more generic using templates but I haven't done this because it isn't yet needed.
+// This is effectively an interator for a navigatable doubly linked list. It could easily be made more generic using templates but I haven't done this because this is for a specific use case.
 class TokenStreamIterator {
 private:
 	struct Node {
@@ -37,7 +37,7 @@ public:
 	TokenStreamIterator (void);
 
 	// Add tokens to the token stream iterator
-	void queueToken(Token*); // O (1)
+	void queueToken(Token*); // O(1)
 
 	// Return true if there is another token after the current position. O(1) in all cases.
 	bool hasNext(void);
@@ -63,7 +63,7 @@ public:
 	// Get the absolute position in the stream where 0 is the first token. -1 indicates the stream is empty.
 	long long unsigned int getPos(void);
 
-	// Set the absolute position in the stream. Returns true if successful and false if not. If unsuccessful the current position is not moved.  O(n) n=length of token stream
+	// Set the absolute position in the stream. Returns true if successful and false if not. If unsuccessful the current position is not moved.
 	bool setPos (long long unsigned int); 
 };
 

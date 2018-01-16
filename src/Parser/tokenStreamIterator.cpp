@@ -4,6 +4,7 @@ TokenStreamIterator::TokenStreamIterator(void)
 {
 	currentNode = nullptr;
 	headNode = nullptr;
+
 	currentLength = 0;
 	currentPosition = EMPTY_POS;
 }
@@ -14,10 +15,12 @@ void TokenStreamIterator::queueToken(Token *token)
 
 	if (headNode == nullptr) {
 		newNode->previous = nullptr;
+		newNode->next = nullptr;
+
 		headNode = newNode;
 		tailNode = headNode;
-		headNode->next = nullptr;
-		currentPosition = 0;
+
+		currentPosition = EMPTY_POS + 1; // The position starts at the empty position + 1 (eg. if the empty pos is 0 then it starts at 1)
 		currentNode = headNode;
 	}
 	else {
@@ -65,9 +68,8 @@ Token * TokenStreamIterator::getToken()
 	if (currentNode == nullptr) {
 		throw No_Token_Found_Exception();
 	}
-	else {
-		return currentNode->element;
-	}
+
+	return currentNode->element;
 }
 
 long long unsigned int TokenStreamIterator::remove (void)
@@ -81,12 +83,12 @@ long long unsigned int TokenStreamIterator::remove (void)
 	if (hasPrevious() && hasNext()) { // Has previous and next nodes (is in middle).
 		currentNode->previous->next = currentNode->next;
 		currentNode = currentNode->next;
+		// Leaves position unchanged since the now current node has been moved back when the one before was removed.
 	}
 	else if (hasPrevious()) { // Has previous node but doesn't have a next node (is at end)
 		currentNode->previous->next = nullptr;
 		currentNode = currentNode->previous;
-		currentPosition--;
-		
+		currentPosition--; // Stream has got smaller and so the old position is now out of bounds so move back.
 	}
 	else if (hasNext()) { // Has a next node but doesn't have a previous node (is at start)
 		currentNode->next->previous = nullptr;
@@ -110,19 +112,17 @@ long long unsigned int TokenStreamIterator::getPos(void)
 // Time complexity is bounded by n. Worst case time complexity and average time complexities are O(n). Best case O(1)
 bool TokenStreamIterator::setPos(long long unsigned int pos)
 {
-	if (pos > currentLength) {
-		return false; // Not possible to set position
+	if (pos > currentLength || pos == EMPTY_POS) {
+		return false; // Not possible to set position to beyond the current length or to the empty position.
 	}
 
-	if (pos > currentPosition) {
-		while (currentPosition != pos) {
-			nextToken();
-		}
+	while (currentPosition < pos) {
+		nextToken();
 	}
-	else if (pos < currentPosition) {
-		while (currentPosition != pos) {
-			previousToken();
-		}
+
+	while (currentPosition > pos) {
+		previousToken();
 	}
+
 	return true; // The move was successful.
 }
