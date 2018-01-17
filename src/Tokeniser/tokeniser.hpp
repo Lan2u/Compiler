@@ -95,6 +95,7 @@ public:
 	// Adds a transition to the tokeniser. Generates the states as needed.
 	void parseTransition(std::string);
 	void addTransition(std::string,std::string,std::string,std::string);
+
 	Token* tokeniseString(std::string);
 
 	// Sets the initial state. 

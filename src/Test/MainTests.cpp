@@ -243,10 +243,14 @@ BOOST_AUTO_TEST_SUITE_END()
 
 BOOST_AUTO_TEST_SUITE(TokeniserTests)
 
-BOOST_AUTO_TEST_CASE(Tokeniser_Tokenise_Int_Test) {
-	std::string fsaDefPath = "tokeniserDef.fsa";
+BOOST_AUTO_TEST_CASE(Tokeniser_Init_Non_Existant_File_Test) {
+	std::string fsaDefPath = "fakeDefThatDoesntExist.fsa";
 	Tokeniser tokeniser(fsaDefPath);
+	// TODO handle this.
+}
 
+BOOST_AUTO_TEST_CASE(Tokeniser_Create_Test) {
+	Tokeniser tokeniser;
 }
 
 BOOST_AUTO_TEST_CASE(Tokeniser_Parse_Accepting_Transition_Test) {
@@ -256,14 +260,25 @@ BOOST_AUTO_TEST_CASE(Tokeniser_Parse_Accepting_Transition_Test) {
 	BOOST_TEST(tokeniser.getNumberOfStates() == 2);
 }
 
-BOOST_AUTO_TEST_CASE(Tokeniser_Parse_Not_Accepting_Transition_Test) {
+BOOST_AUTO_TEST_CASE(Tokeniser_Add_Transition_Set_Initial_State_Test) {
+	Tokeniser tokeniser;
+	std::string initalStateId = "A";
+	std::string inputStr = "(";
+	std::string finalStateId = "B";
+	std::string acceptingStateToken = "OPEN_BRACKET";
+	tokeniser.addTransition(initalStateId, inputStr, finalStateId, acceptingStateToken);
+
+	tokeniser.setInitialState(inputStr);
+}
+
+BOOST_AUTO_TEST_CASE(Tokeniser_Parse_Not_Accepting_getNumberOfStates_Transition_Test) {
 	Tokeniser tokeniser;
 	std::string str = "A,#,B,";
 	tokeniser.parseTransition(str);
 	BOOST_TEST(tokeniser.getNumberOfStates() == 2);
 }
 
-BOOST_AUTO_TEST_CASE(Tokeniser_Add_Accepting_Transition_Test) {
+BOOST_AUTO_TEST_CASE(Tokeniser_Add_Accepting_Transition_getNumberOfStates_Test) {
 	Tokeniser tokeniser;
 	std::string initalStateId = "A";
 	std::string inputStr = "(";
