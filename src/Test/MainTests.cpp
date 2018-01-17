@@ -299,7 +299,6 @@ BOOST_AUTO_TEST_CASE(Tokeniser_Add_Not_Accepting_Transition_Test) {
 }
 
 BOOST_AUTO_TEST_SUITE_END()
-
 BOOST_AUTO_TEST_SUITE(QueueTests)
 
 BOOST_AUTO_TEST_CASE(Queue_Create_Test) {
@@ -981,5 +980,4 @@ BOOST_AUTO_TEST_CASE(TokenStreamIterator_setPos_Empty_Test) {
 	TokenStreamIterator tsi;
 	BOOST_TEST(tsi.setPos(0) == false);
 }
-
 BOOST_AUTO_TEST_SUITE_END()
