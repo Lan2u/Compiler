@@ -741,7 +741,153 @@ BOOST_AUTO_TEST_CASE(TokenStreamIterator_Queue_3_inMiddle_getPos_Test) {
 	// Move to middle
 	tsi.nextToken();
 
-	BOOST_TEST(tsi.getPos() == 2);
+	BOOST_TEST(tsi.getPos() == EMPTY_POS + 1);
+}
+
+BOOST_AUTO_TEST_CASE(TokenStreamIterator_Queue_3_Next_Test) {
+	TokenStreamIterator tsi;
+	Token* token1 = new Token();
+	Token* token2 = new Token();
+	Token* token3 = new Token();
+
+	tsi.queueToken(token1);
+	tsi.queueToken(token2);
+	tsi.queueToken(token3);
+
+	BOOST_TEST(tsi.hasNext());
+	BOOST_TEST(tsi.nextToken() == token2);
+	BOOST_TEST(tsi.hasNext());
+	BOOST_TEST(tsi.nextToken() == token3);
+}
+
+BOOST_AUTO_TEST_CASE(TokenStreamIterator_Queue_5_Test) {
+	TokenStreamIterator tsi;
+	Token* token1 = new Token();
+	Token* token2 = new Token();
+	Token* token3 = new Token();
+	Token* token4 = new Token();
+	Token* token5 = new Token();
+
+	tsi.queueToken(token1);
+	tsi.queueToken(token2);
+	tsi.queueToken(token3);
+	tsi.queueToken(token4);
+	tsi.queueToken(token5);
+}
+
+BOOST_AUTO_TEST_CASE(TokenStreamIterator_Queue_5_getPos_Test) {
+	TokenStreamIterator tsi;
+	Token* token1 = new Token();
+	Token* token2 = new Token();
+	Token* token3 = new Token();
+	Token* token4 = new Token();
+	Token* token5 = new Token();
+
+	tsi.queueToken(token1);
+	tsi.queueToken(token2);
+	tsi.queueToken(token3);
+	tsi.queueToken(token4);
+	tsi.queueToken(token5);
+
+	BOOST_TEST(tsi.getPos() == 1);
+}
+
+BOOST_AUTO_TEST_CASE(TokenStreamIterator_Queue_5_hasPrevious_Test) {
+	TokenStreamIterator tsi;
+	Token* token1 = new Token();
+	Token* token2 = new Token();
+	Token* token3 = new Token();
+	Token* token4 = new Token();
+	Token* token5 = new Token();
+
+	tsi.queueToken(token1);
+	tsi.queueToken(token2);
+	tsi.queueToken(token3);
+	tsi.queueToken(token4);
+	tsi.queueToken(token5);
+
+	BOOST_TEST(tsi.hasPrevious() == false);
+}
+
+BOOST_AUTO_TEST_CASE(TokenStreamIterator_Queue_5_hasNext_Test) {
+	TokenStreamIterator tsi;
+	Token* token1 = new Token();
+	Token* token2 = new Token();
+	Token* token3 = new Token();
+	Token* token4 = new Token();
+	Token* token5 = new Token();
+
+	tsi.queueToken(token1);
+	tsi.queueToken(token2);
+	tsi.queueToken(token3);
+	tsi.queueToken(token4);
+	tsi.queueToken(token5);
+
+	BOOST_TEST(tsi.hasNext() == true);
+}
+
+BOOST_AUTO_TEST_CASE(TokenStreamIterator_Queue_5_getToken_Test) {
+	TokenStreamIterator tsi;
+	Token* token1 = new Token();
+	Token* token2 = new Token();
+	Token* token3 = new Token();
+	Token* token4 = new Token();
+	Token* token5 = new Token();
+
+	tsi.queueToken(token1);
+	tsi.queueToken(token2);
+	tsi.queueToken(token3);
+	tsi.queueToken(token4);
+	tsi.queueToken(token5);
+
+	BOOST_TEST(tsi.getToken() == token1);
+}
+
+BOOST_AUTO_TEST_CASE(TokenStreamIterator_Queue_5_nextToken_Test) {
+	TokenStreamIterator tsi;
+	Token* token1 = new Token();
+	Token* token2 = new Token();
+	Token* token3 = new Token();
+	Token* token4 = new Token();
+	Token* token5 = new Token();
+
+	tsi.queueToken(token1);
+	tsi.queueToken(token2);
+	tsi.queueToken(token3);
+	tsi.queueToken(token4);
+	tsi.queueToken(token5);
+
+	BOOST_TEST(tsi.nextToken() == token2);
+}
+
+BOOST_AUTO_TEST_CASE(TokenStreamIterator_Queue_5_nextTokenValue_Test) {
+	TokenStreamIterator tsi;
+
+	std::string token1Str = "Token 1";
+	std::string token2Str = "Token 2";
+	std::string token3Str = "Token 3";
+	std::string token4Str = "Token 4";
+	std::string token5Str = "Token 5";
+
+	Token* token1 = new Token();
+	token1->setValue(token1Str);
+	Token* token2 = new Token();
+	token2->setValue(token2Str);
+	Token* token3 = new Token();
+	token3->setValue(token3Str);
+	Token* token4 = new Token();
+	token4->setValue(token4Str);
+	Token* token5 = new Token();
+	token5->setValue(token5Str);
+
+	tsi.queueToken(token1);
+	tsi.queueToken(token2);
+	tsi.queueToken(token3);
+	tsi.queueToken(token4);
+	tsi.queueToken(token5);
+
+	Token* token = tsi.nextToken();
+	BOOST_TEST(token->getValue() == token2Str);
 }
 
 BOOST_AUTO_TEST_CASE(TokenStreamIterator_Empty_setPos_Out_Of_Range_Test) {
