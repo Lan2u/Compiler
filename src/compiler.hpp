@@ -1,11 +1,11 @@
-#ifndef MyCompiler
-#define MyCompiler
+#ifndef COMPILER_HPP
+#define COMPILER_HPP
 #include <string>
-#include "Parser\parser.hpp"
-#include "Preprocessor\preprocessor.hpp"
-#include "Tokeniser\tokeniser.hpp"
+#include "Parser/parser.hpp"
+#include "Preprocessor/preprocessor.hpp"
+#include "Tokeniser/tokeniser.hpp"
 
-class MyCompiler{
+class MyCompiler {
 public:
 	// Compile the given file.
 	void compile(std::string, std::string);
@@ -19,4 +19,5 @@ public:
 	FILE_WRITER.write(compiledCode, outPath); // The assembly is written to a file with sutiable metadata.
 	*/
 };
-#endif
+
+#endif // COMPILER_HPP

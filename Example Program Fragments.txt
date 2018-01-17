@@ -1,0 +1,14 @@
+Declaration:
+int x;
+int y;
+int z;
+
+Declaration with initialisation:
+int x = 10;
+int y = 11;
+int z = add(x,y);
+
+Method Declaration and Initialisation:
+int add(int x, int y){
+    return (x + y);
+}

@@ -10,7 +10,8 @@
 #include <fstream>
 
 #include "../RPN/postfix.hpp"
-#include "../RPN/list.hpp"
+#include "../DataStructures/queue.hpp"
+
 
 class Preprocessor {
 private:

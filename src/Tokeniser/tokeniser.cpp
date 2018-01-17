@@ -1,18 +1,13 @@
 #include "tokeniser.hpp"
+// Paul Lancaster and Eva Lott 
 
 #define FSA_DEF_DELIMITER ","
 
-// Find the state with the given id in the list of states and return a pointer to it or a nullptr if not found
-State* Tokeniser::findState(std::string id, List<State*>* states) {
-	// TODO implement
-	return nullptr;
-}
-
 // Get the token that is represented by the given token type string. Eg. OPERATOR would give a token of OPERATOR type. 
-// Initially this is statically hard coded however it should probably be stored in a file
-Token* Tokeniser::getAcceptingTokenType(std::string tokenTypeStr) {
-	// TODO
-	return nullptr;
+Token* Tokeniser::getAcceptingTokenType(std::string tokenTypeStr, std::string value) {
+	Token* token = Token::getRelevantToken(tokenTypeStr); // Get the token the corresponds to the token string
+	token->setValue(value);  // Attach the value to the token
+	return token;
 }
 
 Tokeniser::Tokeniser(std::string fsaDefinitionFilePath){	
@@ -22,64 +17,84 @@ Tokeniser::Tokeniser(std::string fsaDefinitionFilePath){
 		return;
 	}
 
-	List<State*> states; // TODO Replacing with a map will be more efficient however it is not a priority.
-
 	for (std::string definitionLine; std::getline(fsaFileStream, definitionLine); ) {
-		// Parse the state
-		std::stringstream strStream(definitionLine);
-		
-		std::string initialStateId;
-		std::string input; // Should be singular character
-		std::string finalStateId;
-		std::string acceptingTokenTypeStr;
-		
-		strStream >> initialStateId;
-		strStream >> input;
-		strStream >> finalStateId;
-		
-		// TODO handle there not being 4 pieces of the definition
-		strStream >> acceptingTokenTypeStr;
-
-		State* initialState = findState(initialStateId, &states);
-		if (initialState == nullptr) {
-			initialState = new State(initialStateId);
-			states.push(initialState);
-		}
-
-		State* finalState = findState(finalStateId, &states);
-		if (finalState == nullptr) {
-			finalState = new State(finalStateId);
-			states.push(finalState);
-		}
-
-		
-		if (acceptingTokenTypeStr != "") {
-			Token* tokenType = getAcceptingTokenType(acceptingTokenTypeStr);
-			finalState->setAccepting(tokenType);
-		}
-		
-		initialState->addTransition(input.at(0), finalState);
+		parseTransition(definitionLine);
 	}
 
+}
+
+void Tokeniser::addTransition(std::string initialStateId, std::string inputChar, std::string finalStateId, std::string acceptingTokenTypeStr) {
+	State* initialState;
+	State* finalState;
+	try {
+		initialState = states.findStateById(initialStateId);
+	}
+	catch (State_Not_Found_Exception) {
+		initialState = new State(initialStateId);
+		states.add(initialState);
+	}
+
+	try {
+		finalState = states.findStateById(finalStateId);
+	}
+	catch (State_Not_Found_Exception) {
+		finalState = new State(finalStateId);
+		states.add(finalState);
+	}
+
+	if (acceptingTokenTypeStr != "") {
+		finalState->setAccepting(acceptingTokenTypeStr);
+	}
+
+	initialState->addTransition(inputChar.at(0), finalState);
+}
+
+void Tokeniser::parseTransition(std::string transitionStr)
+{
+	std::vector<std::string> splitVec;
+	boost::split(splitVec, transitionStr, boost::is_any_of(FSA_DEF_DELIMITER));
+	int capacity = splitVec.capacity();
+
+	if (capacity == 3) {
+		addTransition(splitVec.at(0), splitVec.at(1), splitVec.at(2), "");
+	}
+	else if (capacity == 4) {
+		addTransition(splitVec.at(0), splitVec.at(1), splitVec.at(2), splitVec.at(3));
+	}
+	else {
+		// TODO malformed FSA def handeling.
+	}
 }
 
 // Tokenises the given string and returns the tokenised result.
 Token* Tokeniser::tokeniseString(std::string str)
 {
 	reset();
-	for (int i = 0; i < str.length(); i++) {
+	for (unsigned i = 0; i < str.length(); i++) {
 		currentState = currentState->getNext(str.at(i));
 	}
 	
 	if (currentState->isAccepting()) {
-		Token* token = currentState->getInstanceOfToken();
-		token->setValue(str);
-		return token;
+		return getAcceptingTokenType(currentState->getAcceptingTokenTypeStr(), str);
 	}
 	else {
 		// TODO invalid token encountered
 		exit(EXIT_FAILURE);
 	}
+}
+
+Tokeniser::Tokeniser(void) {
+	reset();
+}
+
+unsigned long long Tokeniser::getNumberOfStates()
+{
+	return states.getLength();
+}
+
+void Tokeniser::setInitialState(std::string stateId){
+	State* initState = states.findStateById(stateId);
+	initialState = initState;
 }
 
 void Tokeniser::reset()
@@ -90,21 +105,21 @@ void Tokeniser::reset()
 State::State(std::string id)
 {
 	stateId = id; 
-	acceptingTokenType = nullptr;
+	acceptingTokenTypeStr = "";
 }
 
 // Return true if the state is an accepting state.
 bool State::isAccepting() {
-	return (acceptingTokenType != nullptr);
+	return !(acceptingTokenTypeStr == "");
 }
 
-Token * State::getInstanceOfToken()
+std::string State::getAcceptingTokenTypeStr()
 {
-	return nullptr;
+	return std::string();
 }
 
-void State::setAccepting(Token* type) {
-	acceptingTokenType = type;
+void State::setAccepting(std::string acceptingTokenStr) {
+	acceptingTokenTypeStr = acceptingTokenStr;
 }
 
 void State::addTransition(char input, State * finalState)
@@ -122,4 +137,88 @@ State * State::getNext(char input)
 	else {
 		return next;
 	}
+}
+
+/*
+Instansiate a new StateContainer.
+*/
+StateContainer::StateContainer (void) {
+	length = 0;
+	head = nullptr;
+	tail = nullptr;
+}
+
+// Delete nodes
+StateContainer::~StateContainer (void)
+{
+	Node *n = head, *tn;
+	while ((tn = n) != nullptr) {
+		n = n->next;
+		delete tn;
+	}
+}
+
+
+/* Finds the given state in the list */
+/* Throws a State_Not_Found_Exception if the state is not found */
+State *StateContainer::findStateById(std::string id) {
+	Node *node = head;
+	while (node != nullptr) {
+		if (node->state->getId() == id) {
+			return node->state;
+		}
+		node = node->next;
+	}
+	throw State_Not_Found_Exception();
+}
+
+/* Finds the 2 states which have the given id's and returns them in a vector in order
+with the first element of the returned vector corresponding to the first id and visa versa.
+If one of the states is not found then it will be represented by a nullptr */
+std::vector<State*> StateContainer::findStatesById(std::string id1, std::string id2)
+{
+	std::vector<State*> result;
+	
+	Node* node = head;
+
+	State* state1 = nullptr;
+	State* state2 = nullptr;
+
+	while (node != nullptr && (state1 == nullptr || state2 == nullptr)) {
+		if (node->state->getId() == id1) {
+			state1 = node->state;
+		}
+		else if (node->state->getId() == id2) {
+			state2 = node->state;
+		}
+		node = node->next;
+	}
+
+	result.push_back(state1);
+	result.push_back(state2);
+
+	return result;
+}
+
+long long unsigned StateContainer::getLength()
+{
+	return length;
+}
+
+/* Add the given state to the state container. Makes no check for duplicate */
+void StateContainer::add(State * state)
+{
+	Node *node = new Node(state);
+	node->next = nullptr;
+
+	if (head == nullptr) {
+		head = node;
+		tail = head;
+	}
+	else {
+		tail->next = node;
+		tail = node;
+	}
+
+	length++;
 }
