@@ -741,7 +741,7 @@ BOOST_AUTO_TEST_CASE(TokenStreamIterator_Queue_3_inMiddle_getPos_Test) {
 	// Move to middle
 	tsi.nextToken();
 
-	BOOST_TEST(tsi.getPos() == EMPTY_POS + 1);
+	BOOST_TEST(tsi.getPos() == EMPTY_POS + 2);
 }
 
 BOOST_AUTO_TEST_CASE(TokenStreamIterator_Queue_3_Next_Test) {

@@ -27,6 +27,7 @@ void TokenStreamIterator::queueToken(Token *token)
 		newNode->previous = tailNode;
 		newNode->next = nullptr;
 		tailNode->next = newNode;
+		tailNode = tailNode->next;
 	}
 
 	currentLength++;
